@@ -1,18 +1,63 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import {
+  Box,
+  CameraControls,
+  Html,
+  Plane,
+  Text,
+  Torus,
+} from "@react-three/drei";
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
+import Magazine from "./Magazine";
+import { Suspense, useState } from "react";
+import { clamp } from "three/src/math/MathUtils.js";
+import TestPlane from "./TestPlane";
+import PageText from "./PageText";
+import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
+import Book from "./Book";
 
 function App() {
+  const minPage = 0;
+  const maxPage = 2;
+  const [page, setPage] = useState(0);
+
+  const cyclePage = (direction: number) => {
+    const newPageNum = clamp(page + direction, minPage, maxPage);
+    setPage(newPageNum);
+  };
+
   return (
-    <Canvas>
-      <ambientLight intensity={Math.PI / 2} />
-      <mesh>
-        <boxGeometry />
-        <meshBasicMaterial />
-      </mesh>
-    </Canvas>
+    <>
+      <Canvas camera={{ position: [0, 3, 4] }}>
+        <Suspense>
+          <Physics debug colliders={"hull"} gravity={[0, -9.8, 0]}>
+            <RigidBody position={[0, -2, 0]} colliders={"cuboid"}>
+              <TestPlane size={20} />
+            </RigidBody>
+            <Book width={3} length={4} height={1} thickness={0.2} />
+          </Physics>
+        </Suspense>
+        {/*
+        <Magazine page={page} />
+        <mesh position={[3, 0.5, 0]} onClick={() => cyclePage(1)}>
+          <boxGeometry />
+          <meshBasicMaterial color="red" />
+        </mesh>
+        <mesh position={[-3, 0.5, 0]} onClick={() => cyclePage(-1)}>
+          <boxGeometry />
+          <meshBasicMaterial color="green" />
+        </mesh>
+        <mesh position={[0, 2, -2]} onClick={() => cyclePage(-1)}>
+          <boxGeometry />
+          <meshBasicMaterial color="black" opacity={0.1} />
+          <PageText />
+        </mesh>
+        <TestPlane size={40} />
+      */}
+        <CameraControls />
+        <ambientLight intensity={Math.PI / 2} />
+      </Canvas>
+    </>
   );
 }
 
