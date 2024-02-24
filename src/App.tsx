@@ -30,11 +30,9 @@ function App() {
     <>
       <Canvas camera={{ position: [0, 3, 4] }}>
         <Suspense>
-          <Physics debug colliders={"hull"} gravity={[0, -9.8, 0]}>
-            <RigidBody position={[0, -2, 0]} colliders={"cuboid"}>
-              <TestPlane size={20} />
-            </RigidBody>
-            <Book width={3} length={4} height={1} thickness={0.2} />
+          <Physics debug colliders={"hull"} gravity={[0, -3, 0]}>
+            <CuboidCollider args={[20, 1, 20]} position={[0, -2, 0]} />
+            <Book width={3} length={4} height={0.35} thickness={0.05} />
           </Physics>
         </Suspense>
         {/*
