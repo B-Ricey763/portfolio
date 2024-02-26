@@ -1,18 +1,18 @@
 import { animated, config, useSpring } from "@react-spring/three";
 import { Box } from "@react-three/drei";
-import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
+import { Props, ThreeEvent, useFrame, useThree } from "@react-three/fiber";
 import { RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { useEffect, useRef, useState } from "react";
 import { Camera, Euler, Mesh, Quaternion, Vector3 } from "three";
 
-export default function Book() {
+export default function Book(props: JSX.IntrinsicElements['group'] & Props) {
   const box = useRef<Mesh>(null);
   const rigidBody = useRef<RapierRigidBody>(null);
   const { camera } = useThree();
   const [held, setHeld] = useState(false);
-  const origQuat = useRef<Quaternion>(null);
+  const rotationAxis = new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), Math.PI / 2);
 
-  const targetPos = camera.position.multiplyScalar(0.7).toArray();
+  const targetPos = camera.position.multiplyScalar(0.65).toArray();
   const { pos } = useSpring({
     pos: held ? targetPos : [0, 0, 0],
     config: config.default,
@@ -23,8 +23,11 @@ export default function Book() {
     // rigidBody.current?.setBodyType(2, true);
     if (held) {
       box.current?.setRotationFromQuaternion(new Quaternion());
+      camera.matrixAutoUpdate = true
     } else {
-      box.current?.lookAt(camera.position);
+      const targetQuat = new Quaternion().copy(camera.quaternion).multiply(rotationAxis)
+      box.current?.setRotationFromQuaternion(targetQuat);
+      camera.matrixAutoUpdate = false
     }
 
     setHeld(!held);
@@ -37,8 +40,7 @@ export default function Book() {
       ref={box}
       position={pos.to((x, y, z) => [x, y, z])}
     >
-      <boxGeometry args={[3, 3, 1]} />
-      <meshPhongMaterial color="royalblue" />
+      {props.children}
     </animated.mesh>
     // </RigidBody>
   );
