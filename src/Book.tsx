@@ -1,122 +1,45 @@
-import { Box, useCamera, useScroll } from "@react-three/drei";
-import {
-  RapierRigidBody,
-  RigidBody,
-  useRevoluteJoint,
-  RigidBodyTypeString,
-  vec3,
-} from "@react-three/rapier";
+import { animated, config, useSpring } from "@react-spring/three";
+import { Box } from "@react-three/drei";
+import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
+import { RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { useEffect, useRef, useState } from "react";
-import { MeshBasicMaterial } from "three";
-import Page from "./Page";
-import * as THREE from "three";
-import { ThreeEvent, useFrame } from "@react-three/fiber";
+import { Camera, Euler, Mesh, Quaternion, Vector3 } from "three";
 
-type BookProps = {
-  width: number;
-  length: number;
-  height: number;
-  thickness: number;
-};
-
-export default function Book({ width, length, height, thickness }: BookProps) {
-  const frontCover = useRef<RapierRigidBody>(null);
-  const spine = useRef<RapierRigidBody>(null);
-  const backCover = useRef<RapierRigidBody>(null);
-  const goalPos = new THREE.Vector3(0, 2, -1);
-
+export default function Book() {
+  const box = useRef<Mesh>(null);
+  const rigidBody = useRef<RapierRigidBody>(null);
+  const { camera } = useThree();
   const [held, setHeld] = useState(false);
+  const origQuat = useRef<Quaternion>(null);
 
-  const frontSpineJoint = useRevoluteJoint(spine, frontCover, [
-    [thickness * 0.5, height * 0.5, height * 0.5],
-    [-width * 0.5, -thickness * 0.5, height * 0.5],
-    [0, 0, 1],
-  ]);
-
-  const backSpineJoint = useRevoluteJoint(spine, backCover, [
-    [thickness * 0.5, -height * 0.5, height * 0.5],
-    [-width * 0.5, thickness * 0.5, height * 0.5],
-    [0, 0, 1],
-  ]);
-
-  useFrame(() => {
-    frontSpineJoint.current?.setContactsEnabled(false);
-    backSpineJoint.current?.setContactsEnabled(false);
-    // frontSpineJoint.current?.setLimits(0, Math.PI * 0.5);
-    // backSpineJoint.current?.setLimits(-Math.PI * 0.5, 0);
-    // backSpineJoint.current?.configureMotorVelocity(1, 0);
-    frontSpineJoint.current?.configureMotorPosition(-1, 20000, 1000);
-    backSpineJoint.current?.configureMotorPosition(0, 20000, 1000);
-
-    if (held) {
-      const dir = goalPos.sub(
-        spine.current?.translation() ?? new THREE.Vector3(0, 0, 0),
-      );
-      if (dir.length() < 0.1) {
-        spine.current?.setLinvel(new THREE.Vector3(0, 0, 0), true);
-      }
-    }
+  const targetPos = camera.position.multiplyScalar(0.7).toArray();
+  const { pos } = useSpring({
+    pos: held ? targetPos : [0, 0, 0],
+    config: config.default,
   });
 
-  useEffect(() => {
+  const onClick = (e: ThreeEvent<MouseEvent>) => {
+    // Make it velocity based
+    // rigidBody.current?.setBodyType(2, true);
     if (held) {
-      const t: RigidBodyTypeString = "kinematicPosition";
-      // kinematic position
-      spine.current?.setBodyType(3, true);
-      const dir = goalPos.sub(
-        spine.current?.translation() ?? new THREE.Vector3(0, 0, 0),
-      );
-      spine.current?.setLinvel(dir.normalize().multiplyScalar(0.5), true);
+      box.current?.setRotationFromQuaternion(new Quaternion());
+    } else {
+      box.current?.lookAt(camera.position);
     }
-  }, [held]);
 
-  const onBookClick = (e: ThreeEvent<MouseEvent>) => {
-    setHeld(true);
+    setHeld(!held);
   };
 
-  const pages = [1, 2, 3, 4, 5];
-  const pageStart = -height * 0.5 + 0.01;
-  const spinePosY = thickness * 0.5 + height * 0.5;
-  const wireframe = new MeshBasicMaterial({ wireframe: false, color: "grey" });
   return (
-    <group onClick={onBookClick}>
-      <RigidBody
-        position={[0, thickness + height, 0]}
-        ref={frontCover}
-        mass={1}
-        type="kinematicPosition"
-      >
-        <Box args={[width, thickness, length]} material={wireframe} />
-      </RigidBody>
-      <RigidBody
-        position={[-width * 0.5 - thickness * 0.5, spinePosY, 0]}
-        ref={spine}
-        type="kinematicPosition"
-        mass={1}
-      >
-        <Box args={[thickness, height, length]} material={wireframe} />
-      </RigidBody>
-      <RigidBody ref={backCover} mass={1} type="kinematicPosition">
-        <Box args={[width, thickness, length]} material={wireframe} />
-      </RigidBody>
-
-      {pages.map((item, index) => (
-        <Page
-          width={3}
-          height={4}
-          position={
-            new THREE.Vector3(
-              thickness * 0.5,
-              spinePosY + pageStart + index * 0.1,
-              0,
-            )
-          }
-          spinePos={
-            new THREE.Vector3(thickness * 0.5, pageStart + index * 0.05, 0)
-          }
-          spine={spine}
-        />
-      ))}
-    </group>
+    // <RigidBody position={[0, 2, 0]} ref={rigidBody}>
+    <animated.mesh
+      onClick={onClick}
+      ref={box}
+      position={pos.to((x, y, z) => [x, y, z])}
+    >
+      <boxGeometry args={[3, 3, 1]} />
+      <meshPhongMaterial color="royalblue" />
+    </animated.mesh>
+    // </RigidBody>
   );
 }

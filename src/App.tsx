@@ -14,6 +14,7 @@ import { clamp } from "three/src/math/MathUtils.js";
 import TestPlane from "./TestPlane";
 import PageText from "./PageText";
 import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
+import PhysicsBook from "./Book";
 import Book from "./Book";
 
 function App() {
@@ -30,12 +31,11 @@ function App() {
     <>
       <Canvas camera={{ position: [0, 3, 4] }}>
         <Suspense>
-          <Physics debug colliders={"hull"} gravity={[0, -3, 0]}>
+          <Physics debug colliders={"hull"} gravity={[0, -9.8, 0]}>
+            <Book />
             <CuboidCollider args={[20, 1, 20]} position={[0, -2, 0]} />
-            <Book width={3} length={4} height={0.35} thickness={0.05} />
           </Physics>
         </Suspense>
-        {/*
         <Magazine page={page} />
         <mesh position={[3, 0.5, 0]} onClick={() => cyclePage(1)}>
           <boxGeometry />
@@ -50,8 +50,6 @@ function App() {
           <meshBasicMaterial color="black" opacity={0.1} />
           <PageText />
         </mesh>
-        <TestPlane size={40} />
-      */}
         <CameraControls />
         <ambientLight intensity={Math.PI / 2} />
       </Canvas>
