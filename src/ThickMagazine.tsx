@@ -27,8 +27,7 @@ type GLTFResult = GLTF & {
 type ActionName = "Scene";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
-export default function ThickMagazine(  props: JSX.IntrinsicElements["group"],
-) {
+export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
   const minPage = 0;
   const maxPage = 2;
   const [page, setPage] = useState(0);
@@ -38,21 +37,13 @@ export default function ThickMagazine(  props: JSX.IntrinsicElements["group"],
     setPage(newPageNum);
   };
 
-  const onWheelEvent = (e: ThreeEvent<WheelEvent>) => {
-    if (e.deltaY < 0) {
-      cyclePage(1)
-    } else {
-      cyclePage(-1)
-    }
-  }
-  
   const group = useRef<THREE.Group>();
   const FRAMES_PER_SEC = 24;
   const PAGE_FLIP_FRAMES = 32;
   const actionRef = useRef<THREE.AnimationAction>();
   const keyframeRef = useRef(0);
   const { nodes, materials, animations } = useGLTF(
-    "/ThickMagazine.glb"
+    "/ThickMagazine.glb",
   ) as GLTFResult;
   const { actions } = useAnimations(animations, group);
   const calcFrame = (pg: number) => {
@@ -81,9 +72,9 @@ export default function ThickMagazine(  props: JSX.IntrinsicElements["group"],
         actionRef.current.timeScale = 1;
       }
     }
-  });  
+  });
   return (
-    <group ref={group} {...props} dispose={null} onWheel={onWheelEvent}>
+    <group ref={group} {...props} dispose={null}>
       <group name="Scene">
         <group name="ThickPage">
           <mesh

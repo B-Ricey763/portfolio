@@ -5,14 +5,17 @@ import { RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { useEffect, useRef, useState } from "react";
 import { Camera, Euler, Mesh, Quaternion, Vector3 } from "three";
 
-export default function Book(props: JSX.IntrinsicElements['group'] & Props) {
+export default function Book(props: JSX.IntrinsicElements["group"] & Props) {
   const box = useRef<Mesh>(null);
   const rigidBody = useRef<RapierRigidBody>(null);
   const { camera } = useThree();
   const [held, setHeld] = useState(false);
-  const rotationAxis = new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), Math.PI / 2);
+  const rotationAxis = new Quaternion().setFromAxisAngle(
+    new Vector3(1, 0, 0),
+    Math.PI / 2,
+  );
 
-  const targetPos = camera.position.multiplyScalar(0.65).toArray();
+  const targetPos = camera.position.multiplyScalar(0.5).toArray();
   const { pos } = useSpring({
     pos: held ? targetPos : [0, 0, 0],
     config: config.default,
@@ -23,11 +26,11 @@ export default function Book(props: JSX.IntrinsicElements['group'] & Props) {
     // rigidBody.current?.setBodyType(2, true);
     if (held) {
       box.current?.setRotationFromQuaternion(new Quaternion());
-      camera.matrixAutoUpdate = true
     } else {
-      const targetQuat = new Quaternion().copy(camera.quaternion).multiply(rotationAxis)
+      const targetQuat = new Quaternion()
+        .copy(camera.quaternion)
+        .multiply(rotationAxis);
       box.current?.setRotationFromQuaternion(targetQuat);
-      camera.matrixAutoUpdate = false
     }
 
     setHeld(!held);
