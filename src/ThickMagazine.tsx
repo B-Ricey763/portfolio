@@ -21,7 +21,6 @@ type GLTFResult = GLTF & {
   materials: {
     Material: THREE.MeshStandardMaterial;
     ["Material.001"]: THREE.MeshStandardMaterial;
-
   };
 };
 
@@ -30,11 +29,11 @@ type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
 export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
   const minPage = 0;
-  const maxPage = 2;
+  const maxPage = 3;
   const [page, setPage] = useState(0);
-  const checkerTexture = useTexture("checker.png")
-  checkerTexture.wrapS = THREE.RepeatWrapping
-  checkerTexture.wrapT = THREE.RepeatWrapping
+  const checkerTexture = useTexture("checker.png");
+  checkerTexture.wrapS = THREE.RepeatWrapping;
+  checkerTexture.wrapT = THREE.RepeatWrapping;
   checkerTexture.magFilter = THREE.NearestFilter;
   checkerTexture.colorSpace = THREE.SRGBColorSpace;
   const repeats = 4;
@@ -46,7 +45,7 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
 
   const group = useRef<THREE.Group>();
   const FRAMES_PER_SEC = 24;
-  const PAGE_FLIP_FRAMES = 32;
+  const PAGE_FLIP_FRAMES = 30;
   const actionRef = useRef<THREE.AnimationAction>();
   const keyframeRef = useRef(0);
   const { nodes, materials, animations } = useGLTF(
@@ -58,27 +57,31 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
   };
 
   useEffect(() => {
-    actions.Scene?.setLoop(THREE.LoopOnce, 1);
-    actions.Scene?.play();
+    actions.Test?.setLoop(THREE.LoopOnce, 1);
+    actions.Test?.play();
 
-    actionRef!.current = actions.Scene ?? undefined;
-  }, [actions.Scene]);
+    actionRef!.current = actions.Test ?? undefined;
+  }, [actions.Test]);
 
   useEffect(() => {
     keyframeRef.current = calcFrame(page);
   }, [page]);
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === Key)
-  }
+    if (e.key === "q") {
+      cyclePage(-1);
+    } else if (e.key === "e") {
+      cyclePage(1);
+    }
+  };
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  })
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
 
   useFrame(() => {
     if (actionRef.current) {
@@ -93,22 +96,21 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
     }
   });
 
-
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
         <group name="Sheet1" position={[0, 0.02, 0]}>
           <mesh
-            name="Page1"
+            name="Plane002"
             castShadow
             receiveShadow
             geometry={nodes.Plane002.geometry}
-            material={new THREE.MeshStandardMaterial({ map: checkerTexture })}
+            material={new THREE.MeshStandardMaterial({ map: checkerTexture})}
             morphTargetDictionary={nodes.Plane002.morphTargetDictionary}
             morphTargetInfluences={nodes.Plane002.morphTargetInfluences}
           />
           <mesh
-            name="Page2"
+            name="Plane002_1"
             castShadow
             receiveShadow
             geometry={nodes.Plane002_1.geometry}
@@ -119,7 +121,7 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
         </group>
         <group name="Sheet2" position={[0, 0.01, 0]}>
           <mesh
-            name="Page3"
+            name="Plane005"
             castShadow
             receiveShadow
             geometry={nodes.Plane005.geometry}
@@ -128,7 +130,7 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
             morphTargetInfluences={nodes.Plane005.morphTargetInfluences}
           />
           <mesh
-            name="Page4"
+            name="Plane005_1"
             castShadow
             receiveShadow
             geometry={nodes.Plane005_1.geometry}
@@ -139,7 +141,7 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
         </group>
         <group name="Sheet3">
           <mesh
-            name="Page5"
+            name="Plane006"
             castShadow
             receiveShadow
             geometry={nodes.Plane006.geometry}
@@ -148,7 +150,7 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
             morphTargetInfluences={nodes.Plane006.morphTargetInfluences}
           />
           <mesh
-            name="Page6"
+            name="Plane006_1"
             castShadow
             receiveShadow
             geometry={nodes.Plane006_1.geometry}
