@@ -61,6 +61,18 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
     keyframeRef.current = calcFrame(page);
   }, [page]);
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === Key)
+  }
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  })
+
   useFrame(() => {
     if (actionRef.current) {
       const diff = actionRef.current.time - keyframeRef.current;
@@ -73,6 +85,8 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
       }
     }
   });
+
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
