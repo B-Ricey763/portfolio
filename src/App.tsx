@@ -37,7 +37,7 @@ function App() {
           </Physics>
         </Suspense>
 
-        <CameraControls minDistance={5} maxDistance={10} />
+        <CameraControls minDistance={5} maxDistance={100} />
         <ambientLight intensity={Math.PI / 2} />
       </Canvas>
     </>

@@ -31,13 +31,28 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
   const minPage = 0;
   const maxPage = 3;
   const [page, setPage] = useState(0);
+  // Test texture
   const checkerTexture = useTexture("checker.png");
   checkerTexture.wrapS = THREE.RepeatWrapping;
   checkerTexture.wrapT = THREE.RepeatWrapping;
   checkerTexture.magFilter = THREE.NearestFilter;
   checkerTexture.colorSpace = THREE.SRGBColorSpace;
-  const repeats = 4;
-  checkerTexture.repeat.set(repeats, repeats);
+  checkerTexture.repeat.set(4, 4);
+
+  const coverTexture = useTexture("TestPages/Cover.png");
+  coverTexture.center = new THREE.Vector2(0.5, 0.5);
+  coverTexture.rotation = Math.PI;
+  coverTexture.repeat.x = -1;
+
+  const page1Texture = useTexture("TestPages/Page1.png");
+  page1Texture.center = new THREE.Vector2(0.5, 0.5);
+  page1Texture.rotation = Math.PI;
+
+  const page2Texture = useTexture("TestPages/Page2.png");
+  page2Texture.center = new THREE.Vector2(0.5, 0.5);
+  page2Texture.rotation = Math.PI;
+  page2Texture.repeat.x = -1;
+
   const cyclePage = (direction: number) => {
     const newPageNum = clamp(page + direction, minPage, maxPage);
     setPage(newPageNum);
@@ -72,6 +87,8 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
       cyclePage(-1);
     } else if (e.key === "e") {
       cyclePage(1);
+    } else if (e.key === "Enter") {
+      window.open("https://github.com/B-Ricey763/portfolio");
     }
   };
 
@@ -105,7 +122,7 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
             castShadow
             receiveShadow
             geometry={nodes.Plane002.geometry}
-            material={new THREE.MeshStandardMaterial({ map: checkerTexture})}
+            material={new THREE.MeshStandardMaterial({ map: coverTexture })}
             morphTargetDictionary={nodes.Plane002.morphTargetDictionary}
             morphTargetInfluences={nodes.Plane002.morphTargetInfluences}
           />
@@ -114,7 +131,7 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
             castShadow
             receiveShadow
             geometry={nodes.Plane002_1.geometry}
-            material={materials["Material.001"]}
+            material={new THREE.MeshStandardMaterial({ map: page1Texture })}
             morphTargetDictionary={nodes.Plane002_1.morphTargetDictionary}
             morphTargetInfluences={nodes.Plane002_1.morphTargetInfluences}
           />
@@ -125,7 +142,7 @@ export default function ThickMagazine(props: JSX.IntrinsicElements["group"]) {
             castShadow
             receiveShadow
             geometry={nodes.Plane005.geometry}
-            material={materials.Material}
+            material={new THREE.MeshStandardMaterial({ map: page2Texture })}
             morphTargetDictionary={nodes.Plane005.morphTargetDictionary}
             morphTargetInfluences={nodes.Plane005.morphTargetInfluences}
           />
