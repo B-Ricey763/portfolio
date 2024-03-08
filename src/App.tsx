@@ -1,28 +1,12 @@
-import {
-  ArcballControls,
-  Box,
-  CameraControls,
-  FlyControls,
-  Html,
-  MapControls,
-  OrbitControls,
-  Plane,
-  PresentationControls,
-  Text,
-  Torus,
-  TrackballControls,
-} from "@react-three/drei";
-import "./App.css";
+import { CameraControls, } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import Magazine from "./Magazine";
-import ThickMagazine from "./ThickMagazine";
-import { Suspense, useState } from "react";
-import { clamp } from "three/src/math/MathUtils.js";
-import TestPlane from "./TestPlane";
-import PageText from "./PageText";
-import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
-import PhysicsBook from "./Book";
+import { CuboidCollider, Physics } from "@react-three/rapier";
+import { Suspense } from "react";
+import "./App.css";
 import Book from "./Book";
+import ThickMagazine from "./ThickMagazine";
+
+
 
 function App() {
   return (

@@ -9,7 +9,7 @@ export default function Book(props: JSX.IntrinsicElements["group"] & Props) {
   const box = useRef<Mesh>(null);
   const rigidBody = useRef<RapierRigidBody>(null);
   const { camera } = useThree();
-  const [held, setHeld] = useState(false);
+  const [held, setHeld] = useState(true);
   const rotationAxis = new Quaternion().setFromAxisAngle(
     new Vector3(1, 0, 0),
     Math.PI / 2,
@@ -34,12 +34,6 @@ export default function Book(props: JSX.IntrinsicElements["group"] & Props) {
     [],
   );
 
-  useFrame((state) => {
-    // if () {
-    //   animateHeldBook();
-    // }
-  });
-
   const onClick = (e: ThreeEvent<MouseEvent>) => {
     animateHeldBook();
 
@@ -47,7 +41,7 @@ export default function Book(props: JSX.IntrinsicElements["group"] & Props) {
   };
 
   return (
-    // <RigidBody position={[0, 2, 0]} ref={rigidBody}>
+    //@ts-ignore This is what the docs say to do!
     <animated.mesh onClick={onClick} ref={box} {...springs}>
       {props.children}
     </animated.mesh>
