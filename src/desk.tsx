@@ -6,6 +6,7 @@ import * as THREE from "three";
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import Pickup from "./Pickup";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -28,6 +29,7 @@ type GLTFResult = GLTF & {
 
 export function Desk(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/desk.glb") as GLTFResult;
+  const coffeeRef = useRef<THREE.Mesh>(null);
   return (
     <group {...props} dispose={null}>
       <group>
@@ -86,20 +88,27 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           scale={[13.512, 1, 1]}
           userData={{ name: "Shelf" }}
         />
-        <mesh
-          geometry={nodes.Coffee.geometry}
-          material={materials.Standard}
+        <Pickup
           position={[8.469, 11.467, 0.901]}
           rotation={[0, -0.298, 0]}
-          userData={{ name: "Coffee" }}
-        />
-        <mesh
-          geometry={nodes.ColorChaos.geometry}
-          material={materials.Standard}
+        >
+          <mesh
+            geometry={nodes.Coffee.geometry}
+            material={materials.Standard}
+            userData={{ name: "Coffee" }}
+            ref={coffeeRef}
+          />
+        </Pickup>
+        <Pickup
           position={[-10.167, 16.065, -4.943]}
           rotation={[1.155, -0.039, 0]}
-          userData={{ name: "ColorChaos" }}
-        />
+        >
+          <mesh
+            geometry={nodes.ColorChaos.geometry}
+            material={materials.Standard}
+            userData={{ name: "ColorChaos" }}
+          />
+        </Pickup>
         <mesh
           geometry={nodes.Desk.geometry}
           material={materials.Standard}
@@ -113,14 +122,17 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           scale={96.398}
           userData={{ name: "Floor" }}
         />
-        <mesh
-          geometry={nodes.Bomb.geometry}
-          material={materials.Standard}
+        <Pickup
           position={[-3.619, 15.554, -5.141]}
           rotation={[-0.794, -0.03, 1.611]}
-          scale={[0.506, 0.587, 0.506]}
-          userData={{ name: "Bomb" }}
-        />
+        >
+          <mesh
+            geometry={nodes.Bomb.geometry}
+            material={materials.Standard}
+            scale={[0.506, 0.587, 0.506]}
+            userData={{ name: "Bomb" }}
+          />
+        </Pickup>
         <mesh
           geometry={nodes.Coins.geometry}
           material={materials.Standard}
