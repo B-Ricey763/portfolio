@@ -7,6 +7,10 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import Pickup from "./Pickup";
+import JavaProjects from "./overlays/JavaProjects";
+import ColorChaos from "./overlays/ColorChaos";
+import BombFactoryTycoon from "./overlays/BombFactoryTycoon";
+import ThickMagazine from "./ThickMagazine";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -33,12 +37,17 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
   return (
     <group {...props} dispose={null}>
       <group>
-        <group
+        <Pickup
+          overlay={null}
+          rotationOffset={new THREE.Quaternion().setFromAxisAngle(
+            new THREE.Vector3(1, 0, 0), Math.PI / 2)
+          }
           position={[-0.343, 10.715, 4.323]}
           rotation={[0, 0.072, 0]}
-          scale={[0.954, 0.044, 1.377]}
           userData={{ name: "DeskBook1" }}
-        />
+        >
+          <ThickMagazine />
+        </Pickup>
         <group
           position={[3.926, 10.715, 0.449]}
           rotation={[0, -0.362, 0]}
@@ -89,8 +98,12 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           userData={{ name: "Shelf" }}
         />
         <Pickup
+          overlay={<JavaProjects />}
           position={[8.469, 11.467, 0.901]}
           rotation={[0, -0.298, 0]}
+          rotationOffset={new THREE.Quaternion().setFromAxisAngle(
+            new THREE.Vector3(1, 0, 0), Math.PI / 6)
+          }
         >
           <mesh
             geometry={nodes.Coffee.geometry}
@@ -100,8 +113,12 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           />
         </Pickup>
         <Pickup
+          overlay={<ColorChaos />}
           position={[-10.167, 16.065, -4.943]}
           rotation={[1.155, -0.039, 0]}
+          rotationOffset={new THREE.Quaternion().setFromAxisAngle(
+            new THREE.Vector3(1, 0, 0), Math.PI / 2)
+          }
         >
           <mesh
             geometry={nodes.ColorChaos.geometry}
@@ -123,8 +140,12 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           userData={{ name: "Floor" }}
         />
         <Pickup
+          overlay={<BombFactoryTycoon />}
           position={[-3.619, 15.554, -5.141]}
           rotation={[-0.794, -0.03, 1.611]}
+          rotationOffset={new THREE.Quaternion().setFromAxisAngle(
+            new THREE.Vector3(0, 1, 0), Math.PI / 2)
+          }
         >
           <mesh
             geometry={nodes.Bomb.geometry}

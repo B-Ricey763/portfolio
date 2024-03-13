@@ -1,5 +1,5 @@
-import { Sphere, useHelper } from "@react-three/drei";
-import { useEffect, useRef } from "react";
+import { Sphere, Text, Text3D, useFont, useHelper } from "@react-three/drei";
+import { Suspense, useEffect, useRef } from "react";
 import { RectAreaLight } from "three";
 import { RectAreaLightHelper, RectAreaLightUniformsLib } from "three/examples/jsm/Addons.js";
 import { Desk } from "./desk";
@@ -15,6 +15,9 @@ export default function Scene() {
   return (
     <>
       <Desk />
+      <Text position={[0, 22.5, -5]} fontSize={2}>
+        Bryce Hanna's Portfolio
+      </Text>
       <pointLight position={[20, 20, 10]} intensity={100} >
       </pointLight>
       <pointLight position={[-20, 20, 10]} intensity={100} >
