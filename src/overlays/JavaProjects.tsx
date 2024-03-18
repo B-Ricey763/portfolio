@@ -1,13 +1,19 @@
+import { Center, Container, Title, Text, Paper, Grid, Card } from "@mantine/core";
 
 export default function JavaProjects() {
   return (
-    <div>
-      <h1> Java Projects </h1>
-      <p> Here are some of the projects I have done in Java. </p>
-      <p> 1. A simple calculator </p>
-      <p> 2. A simple text editor </p>
-      <p> 3. A simple game </p>
-    </div>
+    <>
+      <Center>
+        <Title order={2} > Java Projects </Title>
+      </Center>
+      <Grid>
+        <Grid.Col span={4}>
+          <Card shadow="xs" padding="xl" radius="lg" withBorder>
+
+          </Card>
+        </Grid.Col>
+      </Grid>
+    </>
   );
 }
 

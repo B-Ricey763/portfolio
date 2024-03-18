@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import "./App.css";
 import Scene from "./Scene";
 import { Suspense } from "react";
+import '@mantine/core/styles.css';
 
 
 function App() {

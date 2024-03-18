@@ -1,8 +1,7 @@
-import { Sphere, Text, Text3D, useFont, useHelper } from "@react-three/drei";
-import { Suspense, useEffect, useRef } from "react";
+import { Text, Text3D, useFont, useHelper } from "@react-three/drei";
+import { useRef } from "react";
 import { RectAreaLight } from "three";
-import { RectAreaLightHelper, RectAreaLightUniformsLib } from "three/examples/jsm/Addons.js";
-import { Desk } from "./desk";
+import { Desk } from "./Desk";
 
 export default function Scene() {
   const rectAreaLight = useRef<RectAreaLight | null>(null);

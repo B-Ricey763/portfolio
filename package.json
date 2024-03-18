@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/core": "^7.6.2",
+    "@mantine/hooks": "^7.6.2",
     "@react-spring/three": "^9.7.3",
     "@react-three/drei": "^9.99.0",
     "@react-three/fiber": "^8.15.16",
@@ -24,6 +26,9 @@
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "postcss": "^8.4.35",
+    "postcss-preset-mantine": "^1.13.0",
+    "postcss-simple-vars": "^7.0.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   }

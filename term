@@ -48,7 +48,7 @@ export default function Pickup(props: JSX.IntrinsicElements['group'] & Props & P
     <group {...props} >
       {/*ts-ignore This is what the docs say to do!*/}
       <animated.mesh onClick={onClick} ref={meshRef} {...springs}>
-        {(!held && props.overlay !== null) &&
+        {(!held && props.overlay) &&
           <Html fullscreen position={[0, 1, 0]}>
             <MantineProvider forceColorScheme="dark">
               <Container p="xl" size="xs" >
