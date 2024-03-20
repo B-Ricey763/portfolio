@@ -13,16 +13,26 @@ type BookProps = {
   pageCount: number;
   rotationOffset: THREE.Quaternion;
   userData: { name: string };
-}
+};
 
-export default function Book({ itemHeld, setItemHeld, pagePath, pageCount, userData, ...props }: BookProps & JSX.IntrinsicElements["group"]) {
+export default function Book({
+  itemHeld,
+  setItemHeld,
+  pagePath,
+  pageCount,
+  userData,
+  ...props
+}: BookProps & JSX.IntrinsicElements["group"]) {
   const minPage = 0;
   const maxPage = pageCount - 1;
   const [page, setPage] = useState(0);
 
-
   const cyclePage = (direction: number) => {
-    const newPageNum = clamp(page + direction, minPage, Math.floor(maxPage / 2));
+    const newPageNum = clamp(
+      page + direction,
+      minPage,
+      Math.floor(maxPage / 2),
+    );
     setPage(newPageNum);
   };
 
@@ -32,7 +42,6 @@ export default function Book({ itemHeld, setItemHeld, pagePath, pageCount, userD
       setPage(0);
     }
   }, [itemHeld, userData.name]);
-
 
   return (
     <Pickup

@@ -1,10 +1,9 @@
-import { CameraControls, Sphere, useHelper, } from "@react-three/drei";
+import { CameraControls, Sphere, useHelper } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import "./App.css";
 import Scene from "./Scene";
 import { Suspense } from "react";
-import '@mantine/core/styles.css';
-
+import "@mantine/core/styles.css";
 
 function App() {
   return (
