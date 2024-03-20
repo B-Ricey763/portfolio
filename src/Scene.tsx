@@ -31,11 +31,7 @@ export default function Scene() {
           <Outline blur edgeStrength={100} />
           <Sepia intensity={0.1} />
           <Vignette offset={0.5} />
-          <Bloom intensity={0.5} />
-          <ChromaticAberration
-            radialModulation={false}
-            modulationOffset={0.1}
-          />
+          <Bloom intensity={0.1} />
         </EffectComposer>
         <Desk />
       </Selection>

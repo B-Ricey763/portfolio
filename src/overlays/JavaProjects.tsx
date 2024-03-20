@@ -1,12 +1,17 @@
-import { Center, Image, Container, Title, Text, Paper, Grid, Card, Group, Button, Badge } from "@mantine/core";
+import { Grid } from "@mantine/core";
 import ItemOverlay from "../ItemOverlay";
 import { OverlayProps } from "../Desk";
-import { IconBrandGithub } from "@tabler/icons-react";
 import ImageCard from "./ImageCard";
 
 export default function JavaProjects(props: OverlayProps) {
   return (
-    <ItemOverlay setItemHeld={props.setItemHeld} itemHeld={props.itemHeld} title="Java Projects">
+    <ItemOverlay
+      setItemHeld={props.setItemHeld}
+      itemHeld={props.itemHeld}
+      title="Java Projects"
+      p="xl"
+      size="xl"
+    >
       <Grid>
         <Grid.Col span={4}>
           <ImageCard
@@ -25,7 +30,6 @@ export default function JavaProjects(props: OverlayProps) {
           />
         </Grid.Col>
         <Grid.Col span={4}>
-
           <ImageCard
             imagePath="JavaProjects/TicTacToeJava.png"
             title="Tic Tac Toe"
@@ -34,7 +38,6 @@ export default function JavaProjects(props: OverlayProps) {
           />
         </Grid.Col>
       </Grid>
-    </ItemOverlay >
+    </ItemOverlay>
   );
 }
-

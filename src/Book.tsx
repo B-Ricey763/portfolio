@@ -45,6 +45,7 @@ export default function Book({
 
   return (
     <Pickup
+      yOffset={0}
       overlay={
         <BookOverlay
           itemHeld={itemHeld}

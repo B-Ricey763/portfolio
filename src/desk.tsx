@@ -11,6 +11,9 @@ import Pickup from "./Pickup";
 import BombFactoryTycoon from "./overlays/BombFactoryTycoon";
 import ColorChaos from "./overlays/ColorChaos";
 import JavaProjects from "./overlays/JavaProjects";
+import NimGameAI from "./overlays/NimGameAI";
+import Speech from "./overlays/Speech";
+import GeorgiaTech from "./overlays/GeorgiaTech";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -24,6 +27,7 @@ type GLTFResult = GLTF & {
     GT: THREE.Mesh;
     Mic: THREE.Mesh;
     Web: THREE.Mesh;
+    GraduationCap: THREE.Mesh;
   };
   materials: {
     Standard: THREE.MeshStandardMaterial;
@@ -36,10 +40,7 @@ export type OverlayProps = {
   setItemHeld: (item: string) => void;
 };
 
-export function Desk({
-  outlinedObject,
-  ...props
-}: JSX.IntrinsicElements["group"]) {
+export function Desk(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/desk.glb") as GLTFResult;
   const [itemHeld, setItemHeld] = useState("");
 
@@ -176,33 +177,40 @@ export function Desk({
           setItemHeld={setItemHeld}
           userData={{ name: "Bomb" }}
         >
-          <mesh
-            geometry={nodes.Bomb.geometry}
-            material={materials.Standard}
-            scale={[0.506, 0.587, 0.506]}
-          />
+          <mesh geometry={nodes.Bomb.geometry} material={materials.Standard} />
         </Pickup>
-        <mesh
-          geometry={nodes.Coins.geometry}
-          material={materials.Standard}
+        <Pickup
+          overlay={<NimGameAI {...{ setItemHeld, itemHeld }} />}
           position={[1.866, 10.723, -5.751]}
-          scale={[0.326, 0.019, 0.326]}
+          rotationOffset={new THREE.Quaternion().setFromAxisAngle(
+            new THREE.Vector3(0, 1, 0),
+            Math.PI / 2,
+          )}
+          itemHeld={itemHeld}
+          setItemHeld={setItemHeld}
           userData={{ name: "Coins" }}
-        />
-        <mesh
-          geometry={nodes.GT.geometry}
-          material={materials.Shiny}
+        >
+          <mesh geometry={nodes.Coins.geometry} material={materials.Standard} />
+        </Pickup>
+        <Pickup
+          overlay={<GeorgiaTech {...{ setItemHeld, itemHeld }} />}
           position={[-9.535, 12.299, -5.492]}
           rotation={[1.329, 0.084, -0.326]}
-          scale={37.252}
+          itemHeld={itemHeld}
+          rotationOffset={new THREE.Quaternion().setFromAxisAngle(
+            new THREE.Vector3(1, 0, 0),
+            Math.PI / 2,
+          )}
+          setItemHeld={setItemHeld}
           userData={{ name: "GT" }}
-        />
+        >
+          <mesh geometry={nodes.GT.geometry} material={materials.Shiny} />
+        </Pickup>
         <mesh
           geometry={nodes.Mic.geometry}
           material={materials.Standard}
           position={[-9.833, 12.304, 2.172]}
           rotation={[0, 0.522, 0]}
-          scale={[0.524, 0.524, 0.151]}
           userData={{ name: "Mic" }}
         />
         <mesh
@@ -210,9 +218,25 @@ export function Desk({
           material={materials.Standard}
           position={[9.316, 15.591, -5.389]}
           rotation={[-1.217, 0, -0.801]}
-          scale={1.372}
           userData={{ name: "Web" }}
         />
+        <Pickup
+          overlay={<Speech {...{ setItemHeld, itemHeld }} />}
+          position={[-3.226, 12.228, -4.529]}
+          rotation={[0.189, 0.507, -0.154]}
+          rotationOffset={new THREE.Quaternion().setFromAxisAngle(
+            new THREE.Vector3(0, 1, 0),
+            Math.PI / 6,
+          )}
+          itemHeld={itemHeld}
+          setItemHeld={setItemHeld}
+          userData={{ name: "GraduationCap" }}
+        >
+          <mesh
+            geometry={nodes.GraduationCap.geometry}
+            material={materials.Standard}
+          />
+        </Pickup>
       </group>
     </group>
   );

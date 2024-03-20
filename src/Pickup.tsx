@@ -1,14 +1,16 @@
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, Transition } from "@mantine/core";
 import { animated, config, useSpring } from "@react-spring/three";
 import { Box, Html, Sphere, Text, calcPosFromAngles } from "@react-three/drei";
 import { Props, ThreeEvent, useThree } from "@react-three/fiber";
 import { Select } from "@react-three/postprocessing";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { Mesh, Quaternion, Vector3 } from "three";
+import { animated as webAnim } from "@react-spring/web";
 
 type PickupProps = {
-  rotationOffset: Quaternion;
-  overlay: JSX.Element | null;
+  rotationOffset?: Quaternion;
+  yOffset?: number;
+  overlay?: JSX.Element;
   itemHeld: string;
   setItemHeld: (item: string) => void;
   userData: { name: string };
@@ -20,6 +22,10 @@ export default function Pickup(
   const meshRef = useRef<Mesh>(null);
   const { camera } = useThree();
   const [hovered, setHovered] = useState(false);
+  const [animFinished, setAnimFinished] = useState(false);
+
+  // default to 1 because most components will just need thatj
+  const yOffset = props.yOffset ?? 1;
 
   const isHeld = () => {
     return props.itemHeld === props.userData.name;
@@ -31,9 +37,9 @@ export default function Pickup(
 
   const animateHeldBook = () => {
     // we have to account for the local coords of the mesh
-    const cameraPos = camera.localToWorld(new Vector3(0, 0, -4));
+    const cameraPos = camera.localToWorld(new Vector3(0, -yOffset, -4));
     const pos =
-      meshRef.current?.worldToLocal(cameraPos) ?? new Vector3(0, 0, 0);
+      meshRef.current?.worldToLocal(cameraPos) ?? new Vector3(0, yOffset, 0);
     // same with rotation
     const worldQuat =
       meshRef.current?.getWorldQuaternion(new Quaternion()) ?? new Quaternion();
@@ -41,11 +47,13 @@ export default function Pickup(
     const rot = worldQuat
       .invert()
       .multiply(cameraQuat)
-      .multiply(props.rotationOffset);
+      // make rotation offset optional
+      .multiply(props.rotationOffset ?? new Quaternion());
 
     api.start({
       position: isHeld() ? pos.toArray() : [0, 0, 0],
       quaternion: isHeld() ? rot.toArray() : [0, 0, 0, 0],
+      opacity: isHeld() ? 1 : 0,
     });
   };
 
@@ -53,6 +61,8 @@ export default function Pickup(
     () => ({
       position: [0, 0, 0],
       quaternion: [0, 0, 0, 0],
+      opacity: 0,
+      onRest: () => setAnimFinished(true),
       config: config.default,
     }),
     [],
@@ -90,12 +100,19 @@ export default function Pickup(
         onPointerOut={onPointerOut}
       >
         {/*ts-ignore This is what the docs say to do!*/}
-        <animated.mesh onClick={onClick} ref={meshRef} {...springs}>
+        <animated.mesh
+          onClick={onClick}
+          ref={meshRef}
+          position={springs.position}
+          quaternion={springs.quaternion}
+        >
           {isHeld() && (
-            <Html fullscreen position={[0, 0, 0]}>
-              <MantineProvider forceColorScheme="dark">
-                {props.overlay}
-              </MantineProvider>
+            <Html fullscreen position={[0, yOffset, 0]}>
+              <webAnim.div style={{ opacity: springs.opacity }}>
+                <MantineProvider forceColorScheme="dark">
+                  {props.overlay}
+                </MantineProvider>
+              </webAnim.div>
             </Html>
           )}
           {props.children}
