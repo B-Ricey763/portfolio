@@ -60,6 +60,7 @@ export default function Book({
       {...props}
     >
       <ThickMagazine
+        scale={[2, 2, 2]}
         pagePath={pagePath}
         pageCount={pageCount}
         cyclePage={cyclePage}

@@ -37,7 +37,7 @@ export default function Pickup(
 
   const animateHeldBook = () => {
     // we have to account for the local coords of the mesh
-    const cameraPos = camera.localToWorld(new Vector3(0, -yOffset, -4));
+    const cameraPos = camera.localToWorld(new Vector3(0, -yOffset, -5));
     const pos =
       meshRef.current?.worldToLocal(cameraPos) ?? new Vector3(0, yOffset, 0);
     // same with rotation

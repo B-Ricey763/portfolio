@@ -14,6 +14,8 @@ import JavaProjects from "./overlays/JavaProjects";
 import NimGameAI from "./overlays/NimGameAI";
 import Speech from "./overlays/Speech";
 import GeorgiaTech from "./overlays/GeorgiaTech";
+import { useFrame } from "@react-three/fiber";
+import { easing } from "maath";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -49,6 +51,25 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
     Math.PI / 2,
   );
 
+  useFrame((state, delta) => {
+    if (itemHeld === "") {
+      easing.damp3(
+        state.camera.position,
+        [
+          state.pointer.x,
+          20 + state.pointer.y / 2,
+          20 + Math.atan(state.pointer.y * 2),
+        ],
+        0.3,
+        delta,
+      );
+      state.camera.lookAt(
+        state.camera.position.x * 2,
+        3 + state.camera.position.y * 0.5,
+        -4,
+      );
+    }
+  });
   return (
     <group {...props} dispose={null}>
       <group>

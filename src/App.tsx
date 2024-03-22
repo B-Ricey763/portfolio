@@ -1,16 +1,14 @@
-import { CameraControls, Sphere, useHelper } from "@react-three/drei";
+import "@mantine/core/styles.css";
 import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
 import "./App.css";
 import Scene from "./Scene";
-import { Suspense } from "react";
-import "@mantine/core/styles.css";
 
 function App() {
   return (
     <Suspense>
-      <Canvas camera={{ position: [0, 30, 20] }}>
+      <Canvas camera={{ position: [0, 20, 20], fov: 70 }}>
         <Scene />
-        <CameraControls minDistance={5} maxDistance={100} />
       </Canvas>
     </Suspense>
   );

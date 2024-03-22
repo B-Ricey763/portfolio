@@ -1,6 +1,3 @@
-import { useRef, useState } from "react";
-import { MeshStandardMaterial, RectAreaLight } from "three";
-import { Desk } from "./Desk";
 import {
   Autofocus,
   Bloom,
@@ -14,7 +11,11 @@ import {
   Sepia,
   Vignette,
 } from "@react-three/postprocessing";
-import { Box } from "@react-three/drei";
+import { easing } from "maath";
+import { useRef, useState } from "react";
+import { MeshStandardMaterial, RectAreaLight } from "three";
+import { Desk } from "./Desk";
+import { useFrame } from "@react-three/fiber";
 
 export default function Scene() {
   const rectAreaLight = useRef<RectAreaLight | null>(null);
@@ -35,9 +36,7 @@ export default function Scene() {
         </EffectComposer>
         <Desk />
       </Selection>
-      <pointLight position={[20, 20, 10]} intensity={100} />
-      <pointLight position={[-20, 20, 10]} intensity={100} />
-      <pointLight position={[-5, 35, 40]} intensity={100} />
+      <pointLight position={[0, 30, 30]} intensity={1000} />
       <rectAreaLight
         ref={rectAreaLight}
         position={[0, 23, 0]}
