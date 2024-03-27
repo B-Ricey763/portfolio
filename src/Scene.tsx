@@ -1,21 +1,14 @@
 import {
-  Autofocus,
   Bloom,
-  ChromaticAberration,
-  DepthOfField,
   EffectComposer,
-  GodRays,
   Outline,
-  Select,
   Selection,
   Sepia,
   Vignette,
 } from "@react-three/postprocessing";
-import { easing } from "maath";
 import { useRef, useState } from "react";
-import { MeshStandardMaterial, RectAreaLight } from "three";
+import { RectAreaLight } from "three";
 import { Desk } from "./Desk";
-import { useFrame } from "@react-three/fiber";
 
 export default function Scene() {
   const rectAreaLight = useRef<RectAreaLight | null>(null);

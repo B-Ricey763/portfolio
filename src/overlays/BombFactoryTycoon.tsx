@@ -1,5 +1,3 @@
 export default function BombFactoryTycoon() {
-  return (
-    <ImageOverlay
-  )
+  return <p> test </p>;
 }

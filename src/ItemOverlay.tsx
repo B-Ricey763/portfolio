@@ -1,5 +1,4 @@
 import {
-  BoxProps,
   CloseButton,
   Container,
   ContainerProps,
@@ -8,27 +7,35 @@ import {
   Stack,
   Title,
 } from "@mantine/core";
-import { PropsWithChildren } from "react";
-import { OverlayProps } from "./Desk";
+import { PropsWithChildren, useContext } from "react";
+import { ItemContext } from "./ItemContext";
 
 type ItemOverlayProps = {
   title: string;
 };
 
 export default function ItemOverlay({
-  itemHeld,
-  setItemHeld,
+  title,
+  children,
   ...props
-}: PropsWithChildren & OverlayProps & ItemOverlayProps & ContainerProps) {
+}: PropsWithChildren & ItemOverlayProps & ContainerProps) {
+  const { setItem } = useContext(ItemContext);
+
   return (
-    <Container {...props}>
-      <Paper shadow="xs" p="sm" bg="rgba(0, 0, 0, 0.5)" withBorder>
+    <Container {...props} p="xl">
+      <Paper
+        shadow="xs"
+        p="sm"
+        bg="rgba(0, 0, 0, 0.5)"
+        withBorder
+        onClick={(e) => e.stopPropagation()} // Prevent clicks from closing the overlay
+      >
         <Stack>
           <Group justify="space-between">
-            <Title order={2}> {props.title} </Title>
-            <CloseButton onClick={() => setItemHeld("")} />
+            <Title order={2}> {title} </Title>
+            <CloseButton onClick={() => setItem("")} />
           </Group>
-          {props.children}
+          {children}
         </Stack>
       </Paper>
     </Container>

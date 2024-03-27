@@ -5,13 +5,7 @@ import ImageCard from "./ImageCard";
 
 export default function JavaProjects(props: OverlayProps) {
   return (
-    <ItemOverlay
-      setItemHeld={props.setItemHeld}
-      itemHeld={props.itemHeld}
-      title="Java Projects"
-      p="xl"
-      size="xl"
-    >
+    <ItemOverlay title="Java Projects" size="xl">
       <Grid>
         <Grid.Col span={4}>
           <ImageCard

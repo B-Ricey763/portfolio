@@ -1,80 +1,72 @@
-import { MantineProvider, Transition } from "@mantine/core";
 import { animated, config, useSpring } from "@react-spring/three";
-import { Box, Html, Sphere, Text, calcPosFromAngles } from "@react-three/drei";
-import { Props, ThreeEvent, useThree } from "@react-three/fiber";
+import { useCursor } from "@react-three/drei";
+import { ThreeEvent, useThree } from "@react-three/fiber";
 import { Select } from "@react-three/postprocessing";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Mesh, Quaternion, Vector3 } from "three";
-import { animated as webAnim } from "@react-spring/web";
+import { ItemContext } from "./ItemContext";
 
 type PickupProps = {
   rotationOffset?: Quaternion;
   yOffset?: number;
-  overlay?: JSX.Element;
-  itemHeld: string;
-  setItemHeld: (item: string) => void;
-  userData: { name: string };
+  itemName: string;
 };
 
-export default function Pickup(
-  props: JSX.IntrinsicElements["group"] & Props & PickupProps,
-) {
+export default function Pickup({
+  rotationOffset = new Quaternion(),
+  yOffset = 0,
+  itemName,
+  ...props
+}: JSX.IntrinsicElements["group"] & PickupProps) {
   const meshRef = useRef<Mesh>(null);
   const { camera } = useThree();
   const [hovered, setHovered] = useState(false);
-  const [animFinished, setAnimFinished] = useState(false);
-
-  // default to 1 because most components will just need thatj
-  const yOffset = props.yOffset ?? 1;
-
-  const isHeld = () => {
-    return props.itemHeld === props.userData.name;
-  };
-
-  const putDownItem = () => {
-    props.setItemHeld("");
-  };
-
-  const animateHeldBook = () => {
-    // we have to account for the local coords of the mesh
-    const cameraPos = camera.localToWorld(new Vector3(0, -yOffset, -5));
-    const pos =
-      meshRef.current?.worldToLocal(cameraPos) ?? new Vector3(0, yOffset, 0);
-    // same with rotation
-    const worldQuat =
-      meshRef.current?.getWorldQuaternion(new Quaternion()) ?? new Quaternion();
-    const cameraQuat = camera.quaternion;
-    const rot = worldQuat
-      .invert()
-      .multiply(cameraQuat)
-      // make rotation offset optional
-      .multiply(props.rotationOffset ?? new Quaternion());
-
-    api.start({
-      position: isHeld() ? pos.toArray() : [0, 0, 0],
-      quaternion: isHeld() ? rot.toArray() : [0, 0, 0, 0],
-      opacity: isHeld() ? 1 : 0,
-    });
-  };
+  const { item, setItem } = useContext(ItemContext);
+  // Switch cursor to pointer whwen hovering over the object
+  useCursor(hovered);
 
   const [springs, api] = useSpring(
     () => ({
       position: [0, 0, 0],
       quaternion: [0, 0, 0, 0],
-      opacity: 0,
-      onRest: () => setAnimFinished(true),
-      config: config.default,
+      config: config.slow,
     }),
     [],
   );
 
+  const isHeld = () => {
+    return item === itemName;
+  };
+
+  const putDownItem = () => {
+    setItem("");
+  };
+
+  // biome-ignore lint: the only stateful value I need to keep track of is item, everything else if refs
   useEffect(() => {
-    animateHeldBook();
-  }, [props.itemHeld]);
+    // we have to account for the local coords of the mesh
+    const cameraPos = camera.localToWorld(new Vector3(0, -yOffset, -5));
+    const pos = meshRef.current?.worldToLocal(cameraPos) ?? new Vector3();
+    // same with rotation
+    const worldQuat =
+      meshRef.current?.getWorldQuaternion(new Quaternion()) ?? new Quaternion();
+    const cameraQuat = camera.quaternion.clone();
+    const rot = worldQuat
+      .invert()
+      .multiply(cameraQuat)
+      // make rotation offset optional
+      .multiply(rotationOffset);
+
+    api.start({
+      position: isHeld() ? pos.toArray() : [0, 0, 0],
+      quaternion: isHeld() ? rot.toArray() : [0, 0, 0, 0],
+    });
+  }, [item]);
 
   const onClick = (e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
     if (!isHeld()) {
-      props.setItemHeld(props.userData.name);
+      setItem(itemName);
     } else {
       // clicking on the item already held should put it down
       putDownItem();
@@ -98,23 +90,13 @@ export default function Pickup(
         {...props}
         onPointerOver={onPointerOver}
         onPointerOut={onPointerOut}
+        onClick={onClick}
       >
-        {/*ts-ignore This is what the docs say to do!*/}
         <animated.mesh
-          onClick={onClick}
           ref={meshRef}
           position={springs.position}
           quaternion={springs.quaternion}
         >
-          {isHeld() && (
-            <Html fullscreen position={[0, yOffset, 0]}>
-              <webAnim.div style={{ opacity: springs.opacity }}>
-                <MantineProvider forceColorScheme="dark">
-                  {props.overlay}
-                </MantineProvider>
-              </webAnim.div>
-            </Html>
-          )}
           {props.children}
         </animated.mesh>
       </group>

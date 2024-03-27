@@ -1,14 +1,14 @@
-import { useTexture } from "@react-three/drei";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import * as THREE from "three";
 import { clamp } from "three/src/math/MathUtils.js";
 import BookOverlay from "./BookOverlay";
 import Pickup from "./Pickup";
 import ThickMagazine from "./ThickMagazine";
+import { ItemContext } from "./ItemContext";
+
+const BOOK_SCALE = 1.5;
 
 type BookProps = {
-  itemHeld: string;
-  setItemHeld: (item: string) => void;
   pagePath: string;
   pageCount: number;
   rotationOffset: THREE.Quaternion;
@@ -16,56 +16,48 @@ type BookProps = {
 };
 
 export default function Book({
-  itemHeld,
-  setItemHeld,
   pagePath,
   pageCount,
   userData,
   ...props
 }: BookProps & JSX.IntrinsicElements["group"]) {
   const minPage = 0;
-  const maxPage = pageCount - 1;
+  const maxPageTurns = Math.floor((pageCount - 1) / 2);
   const [page, setPage] = useState(0);
+  const { item } = useContext(ItemContext);
 
   const cyclePage = (direction: number) => {
-    const newPageNum = clamp(
-      page + direction,
-      minPage,
-      Math.floor(maxPage / 2),
-    );
+    const newPageNum = clamp(page + direction, minPage, maxPageTurns);
     setPage(newPageNum);
   };
 
-  // Clos  the book when you put it down
+  // Close the book when you put it down
   useEffect(() => {
-    if (itemHeld !== userData.name) {
+    if (item !== userData.name) {
       setPage(0);
     }
-  }, [itemHeld, userData.name]);
+  }, [item, userData.name]);
 
   return (
     <Pickup
       yOffset={0}
       overlay={
         <BookOverlay
-          itemHeld={itemHeld}
-          setItemHeld={setItemHeld}
           cyclePage={cyclePage}
+          percentComplete={page / maxPageTurns}
           link="https://www.youtube.com/@BRicey"
         />
       }
-      itemHeld={itemHeld}
-      setItemHeld={setItemHeld}
       userData={userData}
       {...props}
     >
       <ThickMagazine
-        scale={[2, 2, 2]}
+        scale={BOOK_SCALE}
         pagePath={pagePath}
         pageCount={pageCount}
         cyclePage={cyclePage}
         currentPage={page}
-        isHeld={itemHeld === userData.name}
+        isHeld={item === userData.name}
       />
     </Pickup>
   );
