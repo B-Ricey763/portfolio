@@ -1,10 +1,7 @@
 import {
-  Bloom,
   EffectComposer,
   Outline,
   Selection,
-  Sepia,
-  Vignette,
 } from "@react-three/postprocessing";
 import { useRef, useState } from "react";
 import { RectAreaLight } from "three";
@@ -23,9 +20,6 @@ export default function Scene() {
       <Selection>
         <EffectComposer autoClear={false}>
           <Outline blur edgeStrength={100} />
-          <Sepia intensity={0.1} />
-          <Vignette offset={0.5} />
-          <Bloom intensity={0.1} />
         </EffectComposer>
         <Desk />
       </Selection>
@@ -34,7 +28,7 @@ export default function Scene() {
         ref={rectAreaLight}
         position={[0, 23, 0]}
         width={20}
-        height={15}
+        height={30}
         intensity={5}
         rotation={[-Math.PI / 2, 0, 0]}
       />

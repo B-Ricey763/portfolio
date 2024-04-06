@@ -1,10 +1,5 @@
-import { Button, Group } from "@mantine/core";
-import {
-  IconArrowLeft,
-  IconArrowRight,
-  IconSquareLetterE,
-  IconSquareLetterQ,
-} from "@tabler/icons-react";
+import { Button, Group, Kbd } from "@mantine/core";
+import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 
 type BookOverlayProps = {
   link: string;
@@ -22,7 +17,7 @@ export default function BookOverlay({
       <Button
         onClick={() => cyclePage(-1)}
         leftSection={<IconArrowLeft />}
-        rightSection={<IconSquareLetterQ />}
+        rightSection={<Kbd>Q</Kbd>}
         color="teal"
         disabled={completionPercentage === 0}
       >
@@ -34,7 +29,7 @@ export default function BookOverlay({
       <Button
         onClick={() => cyclePage(1)}
         rightSection={<IconArrowRight />}
-        leftSection={<IconSquareLetterE />}
+        leftSection={<Kbd>E</Kbd>}
         color="teal"
         disabled={completionPercentage === 1}
       >

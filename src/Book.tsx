@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import * as THREE from "three";
 import { clamp } from "three/src/math/MathUtils.js";
-import BookOverlay from "./BookOverlay";
 import Pickup from "./Pickup";
 import ThickMagazine from "./ThickMagazine";
 import { ItemContext } from "./ItemContext";
@@ -12,13 +11,14 @@ type BookProps = {
   pagePath: string;
   pageCount: number;
   rotationOffset: THREE.Quaternion;
-  userData: { name: string };
+  itemName: string;
 };
 
 export default function Book({
   pagePath,
   pageCount,
   userData,
+  itemName,
   ...props
 }: BookProps & JSX.IntrinsicElements["group"]) {
   const minPage = 0;
@@ -33,31 +33,20 @@ export default function Book({
 
   // Close the book when you put it down
   useEffect(() => {
-    if (item !== userData.name) {
+    if (item !== itemName) {
       setPage(0);
     }
-  }, [item, userData.name]);
+  }, [item, itemName]);
 
   return (
-    <Pickup
-      yOffset={0}
-      overlay={
-        <BookOverlay
-          cyclePage={cyclePage}
-          percentComplete={page / maxPageTurns}
-          link="https://www.youtube.com/@BRicey"
-        />
-      }
-      userData={userData}
-      {...props}
-    >
+    <Pickup yOffset={0} itemName={itemName} {...props}>
       <ThickMagazine
         scale={BOOK_SCALE}
         pagePath={pagePath}
         pageCount={pageCount}
         cyclePage={cyclePage}
         currentPage={page}
-        isHeld={item === userData.name}
+        isHeld={item === itemName}
       />
     </Pickup>
   );

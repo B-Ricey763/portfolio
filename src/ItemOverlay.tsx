@@ -28,7 +28,10 @@ export default function ItemOverlay({
         p="sm"
         bg="rgba(0, 0, 0, 0.5)"
         withBorder
-        onClick={(e) => e.stopPropagation()} // Prevent clicks from closing the overlay
+        onClick={(e) => {
+          e.stopPropagation();
+          console.log("itemmm");
+        }} // Prevent clicks from closing the overlay
       >
         <Stack>
           <Group justify="space-between">

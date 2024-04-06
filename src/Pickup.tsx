@@ -9,13 +9,15 @@ import { ItemContext } from "./ItemContext";
 type PickupProps = {
   rotationOffset?: Quaternion;
   yOffset?: number;
+  scaleFactor?: number;
   itemName: string;
 };
 
 export default function Pickup({
   rotationOffset = new Quaternion(),
-  yOffset = 0,
+  yOffset = 1.5,
   itemName,
+  scaleFactor = 1,
   ...props
 }: JSX.IntrinsicElements["group"] & PickupProps) {
   const meshRef = useRef<Mesh>(null);
@@ -29,6 +31,7 @@ export default function Pickup({
     () => ({
       position: [0, 0, 0],
       quaternion: [0, 0, 0, 0],
+      scale: 1,
       config: config.slow,
     }),
     [],
@@ -60,6 +63,7 @@ export default function Pickup({
     api.start({
       position: isHeld() ? pos.toArray() : [0, 0, 0],
       quaternion: isHeld() ? rot.toArray() : [0, 0, 0, 0],
+      scale: isHeld() ? scaleFactor : 1,
     });
   }, [item]);
 
@@ -67,6 +71,7 @@ export default function Pickup({
     e.stopPropagation();
     if (!isHeld()) {
       setItem(itemName);
+      setHovered(false);
     } else {
       // clicking on the item already held should put it down
       putDownItem();
@@ -74,12 +79,14 @@ export default function Pickup({
   };
 
   const onPointerOver = (e: ThreeEvent<PointerEvent>) => {
+    if (isHeld()) return;
     // only the object nearest to the camera should be hovered
     e.stopPropagation();
     setHovered(true);
   };
 
   const onPointerOut = (e: ThreeEvent<PointerEvent>) => {
+    if (isHeld()) return;
     e.stopPropagation();
     setHovered(false);
   };
@@ -96,6 +103,7 @@ export default function Pickup({
           ref={meshRef}
           position={springs.position}
           quaternion={springs.quaternion}
+          scale={springs.scale}
         >
           {props.children}
         </animated.mesh>

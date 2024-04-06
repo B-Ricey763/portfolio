@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import { ItemContext } from "./ItemContext";
-import { ItemOverlayMap } from "./Items";
+import { Item, ItemOverlayMap } from "./Items";
 
 export default function OverlayManager() {
   const { item, setItem } = useContext(ItemContext);
@@ -20,6 +20,7 @@ export default function OverlayManager() {
   }, [item]);
 
   const onClickAway = (e: MouseEvent<HTMLDivElement>) => {
+    console.log("clicked awway");
     e.stopPropagation();
     setItem("");
   };
@@ -32,13 +33,17 @@ export default function OverlayManager() {
     }
   };
 
+  const itemOverlay = ItemOverlayMap[livingItem];
   return (
     <MantineProvider defaultColorScheme="dark">
       <Transition
         duration={500}
         timingFunction="ease"
         transition="pop"
-        mounted={item !== ""}
+        // HACK: For some reason, Matine is greedy and keeps all of the pointer events
+        // to itself, so we have to check specifically for the resume to avoid
+        // capturing events IDK
+        mounted={item !== "" && item !== Item.Resume}
       >
         {(styles) => (
           <div
