@@ -1,10 +1,11 @@
 import { animated, config, useSpring } from "@react-spring/three";
 import { useCursor } from "@react-three/drei";
-import { ThreeEvent, useThree } from "@react-three/fiber";
+import { type ThreeEvent, useThree } from "@react-three/fiber";
 import { Select } from "@react-three/postprocessing";
-import { useContext, useEffect, useRef, useState } from "react";
-import { Mesh, Quaternion, Vector3 } from "three";
-import { ItemContext } from "./ItemContext";
+import { useEffect, useRef, useState } from "react";
+import { type Mesh, Quaternion, Vector3 } from "three";
+import { useAtom } from "jotai";
+import { heldItemAtom } from "./Atoms";
 
 type PickupProps = {
   rotationOffset?: Quaternion;
@@ -23,7 +24,7 @@ export default function Pickup({
   const meshRef = useRef<Mesh>(null);
   const { camera } = useThree();
   const [hovered, setHovered] = useState(false);
-  const { item, setItem } = useContext(ItemContext);
+  const [item, setItem] = useAtom(heldItemAtom);
   // Switch cursor to pointer whwen hovering over the object
   useCursor(hovered);
 

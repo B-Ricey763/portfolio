@@ -1,11 +1,11 @@
 import { Box, Html, Plane, Text, useTexture } from "@react-three/drei";
-import React, { useContext } from "react";
 import { MeshBasicMaterial } from "three";
 import Pickup from "./Pickup";
 import { Item } from "./Items";
 import * as THREE from "three";
-import { ItemContext } from "./ItemContext";
 import ResumeOverlay from "./overlays/ResumeOverlay";
+import { useAtom } from "jotai";
+import { heldItemAtom } from "./Atoms";
 
 export const PAGE_WIDTH = 3.5; // exported for use in ResumeOverlay
 export const PAGE_HEIGHT = PAGE_WIDTH * 1.29; // ratio for US-letter
@@ -14,7 +14,7 @@ const WHITE_MATERIAL = new MeshBasicMaterial({ color: "white" });
 
 export default function Resume(props: JSX.IntrinsicElements["group"]) {
   const pageTexture = useTexture("resume.png");
-  const { item, setItem } = useContext(ItemContext);
+  const [item, setItem] = useAtom(heldItemAtom);
 
   // Only the top face should have the resume png
   const materials = [

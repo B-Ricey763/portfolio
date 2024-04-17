@@ -1,24 +1,47 @@
-import { Text, Card, Image, Group, Button } from "@mantine/core";
-import { IconBrandGithub } from "@tabler/icons-react";
+import { Text, Card, Image, Group, Center, Stack, Box } from "@mantine/core";
 
-type ImageCardProps = {
-  imagePath: string;
+type ContentCardProps = {
   title: string;
   description: string;
-  button: JSX.Element;
+  children: {
+    visualSection: JSX.Element;
+    button: JSX.Element;
+  };
 };
 
-export default function ImageCard({
-  imagePath,
+type VisualSectionProps = {
+  link: string;
+  height?: number;
+};
+
+export function ImageSection({ link, height = 250 }: VisualSectionProps) {
+  return <Image height={height} src={link} />;
+}
+
+export function VideoSection({ link, height = 315 }: VisualSectionProps) {
+  return (
+    <Center>
+      <iframe
+        width="560"
+        height={height}
+        src={link}
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      />
+    </Center>
+  );
+}
+
+export function ContentCard({
   title,
   description,
-  button,
-}: ImageCardProps) {
+  children: { visualSection, button },
+}: ContentCardProps) {
   return (
-    <Card shadow="sm" padding="sm" radius="lg" withBorder>
-      <Card.Section>
-        <Image height={250} src={imagePath} />
-      </Card.Section>
+    <Card shadow="sm" padding="lg" radius="lg" withBorder>
+      <Card.Section>{visualSection}</Card.Section>
 
       <Group justify="space-between" mt="md" mb="xs">
         <Text fw={500}>{title}</Text>
@@ -28,7 +51,7 @@ export default function ImageCard({
         {description}
       </Text>
 
-      {button}
+      <Box style={{ marginTop: "auto" }}>{button}</Box>
     </Card>
   );
 }

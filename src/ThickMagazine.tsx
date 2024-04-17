@@ -14,6 +14,8 @@ import {
 import { GLTF } from "three-stdlib";
 import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
 import { ItemContext } from "./ItemContext";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { heldItemAtom, pageTurnsAtom } from "./Atoms";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -32,8 +34,6 @@ type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 type ThickMagazineProps = {
   pagePath: string;
   pageCount: number;
-  cyclePage: (direction: number) => void;
-  currentPage: number;
   isHeld: boolean;
 };
 
@@ -46,15 +46,16 @@ export default function ThickMagazine(
   const group = useRef<THREE.Group>(null);
   const actionRef = useRef<THREE.AnimationAction>();
   const keyframeRef = useRef(0);
-  let { nodes, _materials, animations } = useGLTF(
+  let { nodes, materials, animations } = useGLTF(
     "/ThickMagazine.glb",
   ) as GLTFResult;
   const { ref, actions } = useAnimations(animations);
-  const defaultMaterial = new THREE.MeshStandardMaterial({ color: "white" });
-  const pageMaterials = new Array<THREE.MeshStandardMaterial>(5).fill(
+  const defaultMaterial = new THREE.MeshBasicMaterial({ color: "white" });
+  const pageMaterials = new Array<THREE.MeshBasicMaterial>(5).fill(
     defaultMaterial,
   );
-  const { setItem } = useContext(ItemContext);
+  const setItem = useSetAtom(heldItemAtom);
+  const [currentPage, setCurrentPage] = useAtom(pageTurnsAtom);
 
   // HACK: The way the blender animation is setup, it finishes
   // at a hardcoded z value, so I can't add more pages without
@@ -66,7 +67,10 @@ export default function ThickMagazine(
     pageTexture.rotation = Math.PI;
     // gotta flip every other page
     pageTexture.repeat.x = i % 2 === 0 ? -1 : 1;
-    pageMaterials[i] = new THREE.MeshStandardMaterial({ map: pageTexture });
+    pageMaterials[i] = new THREE.MeshBasicMaterial({
+      map: pageTexture,
+      color: "white",
+    });
   }
 
   const calcFrame = (pg: number) => {
@@ -82,14 +86,14 @@ export default function ThickMagazine(
   }, [actions.Test]);
 
   useEffect(() => {
-    keyframeRef.current = calcFrame(props.currentPage);
-  }, [props.currentPage, calcFrame]);
+    keyframeRef.current = calcFrame(currentPage);
+  }, [currentPage, calcFrame]);
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "q") {
-      props.cyclePage(-1);
+      setCurrentPage(currentPage - 1);
     } else if (e.key === "e") {
-      props.cyclePage(1);
+      setCurrentPage(currentPage + 1);
     } else if (e.key === "Escape") {
       setItem("");
     }

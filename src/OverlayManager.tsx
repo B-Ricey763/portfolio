@@ -1,16 +1,16 @@
 import { MantineProvider, Transition } from "@mantine/core";
 import {
-  KeyboardEvent,
-  MouseEvent,
-  useContext,
+  type KeyboardEvent,
+  type MouseEvent,
   useEffect,
   useState,
 } from "react";
-import { ItemContext } from "./ItemContext";
 import { Item, ItemOverlayMap } from "./Items";
+import { useAtom } from "jotai";
+import { heldItemAtom } from "./Atoms";
 
 export default function OverlayManager() {
-  const { item, setItem } = useContext(ItemContext);
+  const [item, setItem] = useAtom(heldItemAtom);
   const [livingItem, setLivingItem] = useState("");
 
   useEffect(() => {
@@ -33,7 +33,6 @@ export default function OverlayManager() {
     }
   };
 
-  const itemOverlay = ItemOverlayMap[livingItem];
   return (
     <MantineProvider defaultColorScheme="dark">
       <Transition

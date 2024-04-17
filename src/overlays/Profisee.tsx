@@ -1,28 +1,20 @@
-import { Box, Text, Container, Group, Kbd, Paper, Button } from "@mantine/core";
-import { WebsiteButton } from "../ButtonTemplates";
+import { Button, Stack } from "@mantine/core";
+import BookOverlay from "../BookOverlay";
 import { IconWorld } from "@tabler/icons-react";
 
 export default function Profisee() {
   return (
-    <Box bottom={0} pos="absolute" w="100%">
-      <Group justify="center">
-        <Paper p="sm" m="sm">
-          Previous Page = <Kbd>Q</Kbd>
-        </Paper>
+    <BookOverlay>
+      <Stack justify="flex-end" align="stretch" h="100vh" p="lg">
         <Button
-          component="a"
-          href={"https://profisee.com/"}
-          color="blue"
-          radius="md"
-          leftSection={<IconWorld size={18} />}
           size="lg"
+          component="a"
+          href="https://profisee.com/"
+          leftSection={<IconWorld />}
         >
-          Website
+          Profisee's Website
         </Button>
-        <Paper p="sm" m="sm">
-          Next Page = <Kbd>E</Kbd>
-        </Paper>
-      </Group>
-    </Box>
+      </Stack>
+    </BookOverlay>
   );
 }

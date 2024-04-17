@@ -7,6 +7,8 @@ import { ThreeEvent } from "@react-three/fiber";
 import { useContext, useState } from "react";
 import { ItemContext } from "../ItemContext";
 import { useSpring, animated, config } from "@react-spring/three";
+import { useSetAtom } from "jotai";
+import { heldItemAtom } from "../Atoms";
 
 const AnimatedPlane = animated(Plane);
 const AnimatedText = animated(Text);
@@ -18,7 +20,7 @@ type LearmMoreProps = {
 };
 function LearnMoreButton({ yPos, size, item }: LearmMoreProps) {
   const [hovered, setHovered] = useState(false);
-  const { setItem } = useContext(ItemContext);
+  const setItem = useSetAtom(heldItemAtom);
   useCursor(hovered);
 
   const springs = useSpring({

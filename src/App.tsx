@@ -1,23 +1,20 @@
 import "@mantine/core/styles.css";
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import "./App.css";
 import Scene from "./Scene";
 import OverlayManager from "./OverlayManager";
-import { ItemContext } from "./ItemContext";
+import { CameraManager } from "./CameraManager";
 
 function App() {
-  const [item, setItem] = useState("");
-
   return (
-    <ItemContext.Provider value={{ item, setItem }}>
+    <>
       <OverlayManager />
-      <Suspense>
-        <Canvas camera={{ position: [0, 20, 20], fov: 70 }}>
-          <Scene />
-        </Canvas>
-      </Suspense>
-    </ItemContext.Provider>
+      <Canvas camera={{ position: [0, 20, 20], fov: 70 }} shadows={true}>
+        <Scene />
+        <CameraManager />
+      </Canvas>
+    </>
   );
 }
 

@@ -1,14 +1,15 @@
 import {
-  CloseButton,
+  type ContainerProps,
   Container,
-  ContainerProps,
-  Group,
   Paper,
   Stack,
+  Group,
   Title,
+  CloseButton,
 } from "@mantine/core";
-import { PropsWithChildren, useContext } from "react";
-import { ItemContext } from "./ItemContext";
+import { useSetAtom } from "jotai";
+import type react from "react";
+import { heldItemAtom } from "./Atoms";
 
 type ItemOverlayProps = {
   title: string;
@@ -18,8 +19,8 @@ export default function ItemOverlay({
   title,
   children,
   ...props
-}: PropsWithChildren & ItemOverlayProps & ContainerProps) {
-  const { setItem } = useContext(ItemContext);
+}: react.PropsWithChildren & ItemOverlayProps & ContainerProps) {
+  const setItem = useSetAtom(heldItemAtom);
 
   return (
     <Container {...props} p="xl">
@@ -30,7 +31,6 @@ export default function ItemOverlay({
         withBorder
         onClick={(e) => {
           e.stopPropagation();
-          console.log("itemmm");
         }} // Prevent clicks from closing the overlay
       >
         <Stack>

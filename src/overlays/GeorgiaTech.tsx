@@ -27,7 +27,7 @@ export default function GeorgiaTech(props: OverlayProps) {
         graduate in 2026. Some of my favorite classes I have taken so far
         include:
       </Text>
-      <SimpleGrid cols={3}>
+      <Group grow={true} align="stretch">
         <ClassCard
           name="CS 1332 Data Structures and Algorithms"
           description="Learning and creating fundemental data structures like linked lists, trees, and graphs"
@@ -40,7 +40,7 @@ export default function GeorgiaTech(props: OverlayProps) {
           name="MATH 1564 Linear Algebra with Abstract Vector Spaces"
           description="Using proofs and set theory to understand the properties of vector spaces and linear transformations"
         />
-      </SimpleGrid>
+      </Group>
     </ItemOverlay>
   );
 }
