@@ -29,5 +29,5 @@ export function CameraManager() {
     }
   });
 
-  return DEBUG_MODE ? <CameraControls /> : <> </>;
+  return DEBUG_MODE ? <CameraControls /> : <group />;
 }

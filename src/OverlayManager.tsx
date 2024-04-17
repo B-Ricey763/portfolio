@@ -20,7 +20,6 @@ export default function OverlayManager() {
   }, [item]);
 
   const onClickAway = (e: MouseEvent<HTMLDivElement>) => {
-    console.log("clicked awway");
     e.stopPropagation();
     setItem("");
   };
@@ -39,10 +38,7 @@ export default function OverlayManager() {
         duration={500}
         timingFunction="ease"
         transition="pop"
-        // HACK: For some reason, Matine is greedy and keeps all of the pointer events
-        // to itself, so we have to check specifically for the resume to avoid
-        // capturing events IDK
-        mounted={item !== "" && item !== Item.Resume}
+        mounted={item !== ""}
       >
         {(styles) => (
           <div
@@ -51,6 +47,10 @@ export default function OverlayManager() {
               height: "100%",
               position: "absolute",
               zIndex: 10,
+              // HACK: For some reason, Matine is greedy and keeps all of the pointer events
+              // to itself, so we have to check specifically for the resume to avoid
+              // capturing events IDK
+              pointerEvents: item === Item.Resume ? "none" : "auto",
               ...styles,
             }}
             onClick={onClickAway}

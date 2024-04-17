@@ -6,44 +6,69 @@ import {
   IconWorld,
 } from "@tabler/icons-react";
 
-export const GithubButton = ({ link }: { link: string }) => (
+type ButtonTempProps = {
+  link: string;
+  children?: string;
+  mt?: string;
+  size?: string;
+};
+
+export const GithubButton = ({
+  link,
+  children = "GitHub",
+  mt = "md",
+  size = "sm",
+}: ButtonTempProps) => (
   <Button
     component="a"
     href={link}
+    size={size}
     color="blue"
     fullWidth
-    mt="md"
+    mt={mt}
     radius="md"
     rightSection={<IconBrandGithub size={18} />}
   >
-    GitHub
+    {children}
   </Button>
 );
 
-export const WebsiteButton = ({ link }: { link: string }) => (
+export const WebsiteButton = ({
+  link,
+  children = "Website",
+  mt = "md",
+  size = "sm",
+}: ButtonTempProps) => (
   <Button
+    size={size}
     component="a"
     href={link}
     color="blue"
     fullWidth
-    mt="md"
+    mt={mt}
     radius="md"
     leftSection={<IconWorld size={18} />}
   >
-    Website
+    {children}
   </Button>
 );
 
-export const YouTubeButton = ({ link }: { link: string }) => (
+export const YouTubeButton = ({
+  link,
+  children = "Video",
+  mt = "md",
+  size = "sm",
+}: ButtonTempProps) => (
   <Button
+    size={size}
     component="a"
     href={link}
     color="red"
     fullWidth
-    mt="md"
+    mt={mt}
     radius="md"
     leftSection={<IconBrandYoutube size={18} />}
   >
-    Video
+    {children}
   </Button>
 );

@@ -24,14 +24,15 @@ export default function Book({
   const setMaxPageTurns = useSetAtom(maxPageTurnsAtom);
   const setPageTurn = useSetAtom(pageTurnsAtom);
   const item = useAtomValue(heldItemAtom);
-  setMaxPageTurns(Math.floor((pageCount - 1) / 2));
 
   // Close the book when you put it down
   useEffect(() => {
     if (item !== itemName) {
       setPageTurn(0);
+    } else {
+      setMaxPageTurns(Math.floor(pageCount / 2));
     }
-  }, [item, itemName, setPageTurn]);
+  }, [item, itemName, setPageTurn, setMaxPageTurns, pageCount]);
 
   return (
     <Pickup yOffset={0} itemName={itemName} {...props}>

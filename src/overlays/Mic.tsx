@@ -13,7 +13,11 @@ export default function Mic() {
           visualSection: (
             <VideoSection link="https://www.youtube-nocookie.com/embed/Gart69xNY-M?si=Kuab4TarzmX_0Inp" />
           ),
-          button: <YouTubeButton link="https://www.youtube.com/@BRicey" />,
+          button: (
+            <YouTubeButton link="https://www.youtube.com/@BRicey">
+              YouTube Channel
+            </YouTubeButton>
+          ),
         }}
       </ContentCard>
     </ItemOverlay>

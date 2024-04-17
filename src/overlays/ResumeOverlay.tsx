@@ -9,9 +9,30 @@ import { ItemContext } from "../ItemContext";
 import { useSpring, animated, config } from "@react-spring/three";
 import { useSetAtom } from "jotai";
 import { heldItemAtom } from "../Atoms";
+import { Button, Container, Stack } from "@mantine/core";
+import { IconDownload } from "@tabler/icons-react";
 
 const AnimatedPlane = animated(Plane);
 const AnimatedText = animated(Text);
+
+export function DownloadResumeButton() {
+  return (
+    <Container>
+      <Stack justify="flex-end" align="stretch" h="100vh" p="lg">
+        <Button
+          size="lg"
+          component="a"
+          href="resume.pdf"
+          download="Bryce_Hanna_Resume.pdf"
+          style={{ pointerEvents: "all" }}
+          rightSection={<IconDownload />}
+        >
+          Download Resume
+        </Button>
+      </Stack>
+    </Container>
+  );
+}
 
 type LearmMoreProps = {
   yPos: number;
@@ -36,7 +57,7 @@ function LearnMoreButton({ yPos, size, item }: LearmMoreProps) {
   return (
     <AnimatedPlane
       args={[PAGE_WIDTH, size]}
-      position-y={0.1}
+      position-y={0.04}
       position-z={yPos}
       material={
         new MeshBasicMaterial({
@@ -74,17 +95,27 @@ export default function ResumeOverlay() {
   return (
     <>
       <LearnMoreButton
-        yPos={positionOnPage(0.72)}
-        size={0.45}
+        yPos={positionOnPage(0.59)}
+        size={0.43}
         item={Item.GTLogo}
       />
       <LearnMoreButton
         yPos={positionOnPage(1.8)}
-        size={0.45}
+        size={0.5}
         item={Item.Profisee}
       />
       <LearnMoreButton
-        yPos={positionOnPage(4.15)}
+        yPos={positionOnPage(2.28)}
+        size={0.4}
+        item={Item.YouTube}
+      />
+      <LearnMoreButton
+        yPos={positionOnPage(3.845)}
+        size={0.32}
+        item={Item.GHEvolution}
+      />
+      <LearnMoreButton
+        yPos={positionOnPage(4.25)}
         size={0.45}
         item={Item.ColorTile}
       />

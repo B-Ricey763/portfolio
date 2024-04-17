@@ -42,16 +42,22 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
     <group {...props} dispose={null}>
       <group>
         <Resume position={[-0.343, 10.715, 4.323]} rotation={[0, 0.072, 0]} />
-        <group
+        <Book
+          pagePath="ghevolution"
+          pageCount={5}
+          itemName={Item.GHEvolution}
+          rotationOffset={bookRotOffset}
           position={[3.926, 10.715, 0.449]}
           rotation={[0, -0.362, 0]}
-          scale={[0.954, 0.044, 1.377]}
           userData={{ name: "DeskBook5" }}
         />
-        <group
+        <Book
+          itemName={Item.YouTube}
+          pagePath="youtube"
+          pageCount={6}
+          rotationOffset={bookRotOffset}
           position={[-5.97, 10.715, 0.498]}
           rotation={[0, 0.351, 0]}
-          scale={[0.954, 0.044, 1.377]}
           userData={{ name: "DeskBook3" }}
         />
         <group
