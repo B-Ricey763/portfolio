@@ -2,7 +2,6 @@ import { Button } from "@mantine/core";
 import {
   IconBrandGithub,
   IconBrandYoutube,
-  IconGlobe,
   IconWorld,
 } from "@tabler/icons-react";
 
@@ -22,6 +21,7 @@ export const GithubButton = ({
   <Button
     component="a"
     href={link}
+    target="_blank"
     size={size}
     color="blue"
     fullWidth
@@ -43,6 +43,7 @@ export const WebsiteButton = ({
     size={size}
     component="a"
     href={link}
+    target="_blank"
     color="blue"
     fullWidth
     mt={mt}
@@ -63,6 +64,7 @@ export const YouTubeButton = ({
     size={size}
     component="a"
     href={link}
+    target="_blank"
     color="red"
     fullWidth
     mt={mt}

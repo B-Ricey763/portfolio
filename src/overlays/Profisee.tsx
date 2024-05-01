@@ -9,6 +9,7 @@ export default function Profisee() {
         <Button
           size="lg"
           component="a"
+          target="_blank"
           href="https://profisee.com/"
           leftSection={<IconWorld />}
         >

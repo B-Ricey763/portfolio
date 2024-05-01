@@ -1,6 +1,6 @@
-import { Grid, Group } from "@mantine/core";
+import { Group } from "@mantine/core";
 import ItemOverlay from "../ItemOverlay";
-import { ContentCard, ImageSection } from "./ImageCard";
+import { ContentCard, ImageSection } from "./ContentCard";
 import { GithubButton } from "../ButtonTemplates";
 
 export default function JavaProjects() {

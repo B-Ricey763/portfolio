@@ -1,4 +1,4 @@
-import { Box, Html, Plane, Text, useTexture } from "@react-three/drei";
+import { Box, useTexture } from "@react-three/drei";
 import { MeshBasicMaterial } from "three";
 import Pickup from "./Pickup";
 import { Item } from "./Items";
@@ -41,7 +41,7 @@ export default function Resume(props: JSX.IntrinsicElements["group"]) {
       <Box
         args={[PAGE_WIDTH, 0.05, PAGE_HEIGHT]}
         material={materials}
-        onPointerMissed={() => setItem("")}
+        onPointerMissed={() => setItem(Item.None)}
       />
       {item === Item.Resume && <ResumeOverlay />}
     </Pickup>

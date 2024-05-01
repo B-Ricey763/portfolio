@@ -1,6 +1,6 @@
-import { Grid, Group } from "@mantine/core";
+import { Group } from "@mantine/core";
 import ItemOverlay from "../ItemOverlay";
-import { ContentCard, ImageSection, VideoSection } from "./ImageCard";
+import { ContentCard, ImageSection, VideoSection } from "./ContentCard";
 import { WebsiteButton, YouTubeButton } from "../ButtonTemplates";
 
 export default function BombFactoryTycoon() {

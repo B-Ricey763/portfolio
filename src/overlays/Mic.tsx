@@ -1,6 +1,6 @@
 import { YouTubeButton } from "../ButtonTemplates";
 import ItemOverlay from "../ItemOverlay";
-import { ContentCard, VideoSection } from "./ImageCard";
+import { ContentCard, VideoSection } from "./ContentCard";
 
 export default function Mic() {
   return (

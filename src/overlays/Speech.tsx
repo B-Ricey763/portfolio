@@ -1,5 +1,5 @@
 import ItemOverlay from "../ItemOverlay";
-import { ContentCard, VideoSection } from "./ImageCard";
+import { ContentCard, VideoSection } from "./ContentCard";
 
 export default function Speech() {
   return (

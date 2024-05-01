@@ -1,5 +1,6 @@
 import BombFactoryTycoon from "./overlays/BombFactoryTycoon";
 import ColorChaos from "./overlays/ColorChaos";
+import GBAGame from "./overlays/GBAGame";
 import { GHEvolution } from "./overlays/GHEvolution";
 import GeorgiaTech from "./overlays/GeorgiaTech";
 import JavaProjects from "./overlays/JavaProjects";
@@ -8,6 +9,7 @@ import NimGameAI from "./overlays/NimGameAI";
 import Profisee from "./overlays/Profisee";
 import { DownloadResumeButton } from "./overlays/ResumeOverlay";
 import Speech from "./overlays/Speech";
+import VIP from "./overlays/VIP";
 import Web from "./overlays/Web";
 import YouTube from "./overlays/YouTube";
 
@@ -24,6 +26,9 @@ export enum Item {
   Mic = "Mic",
   Web = "Web",
   YouTube = "YouTube",
+  P51 = "P51",
+  B29 = "B29",
+  None = "",
 }
 
 export const ItemOverlayMap: { [key: string]: JSX.Element } = {
@@ -39,4 +44,6 @@ export const ItemOverlayMap: { [key: string]: JSX.Element } = {
   [Item.Web]: <Web />,
   [Item.Resume]: <DownloadResumeButton />,
   [Item.YouTube]: <YouTube />,
+  [Item.P51]: <VIP />,
+  [Item.B29]: <GBAGame />,
 };

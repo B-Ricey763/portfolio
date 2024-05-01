@@ -4,6 +4,7 @@ import Pickup from "./Pickup";
 import ThickMagazine from "./ThickMagazine";
 import { useAtomValue, useSetAtom } from "jotai";
 import { heldItemAtom, maxPageTurnsAtom, pageTurnsAtom } from "./Atoms";
+import { Item } from "./Items";
 
 const BOOK_SCALE = 1.5;
 
@@ -11,7 +12,7 @@ type BookProps = {
   pagePath: string;
   pageCount: number;
   rotationOffset: Quaternion;
-  itemName: string;
+  itemName: Item;
 };
 
 export default function Book({
@@ -27,12 +28,12 @@ export default function Book({
 
   // Close the book when you put it down
   useEffect(() => {
-    if (item !== itemName) {
+    if (item === Item.None) {
       setPageTurn(0);
     } else {
       setMaxPageTurns(Math.floor(pageCount / 2));
     }
-  }, [item, itemName, setPageTurn, setMaxPageTurns, pageCount]);
+  }, [item, setPageTurn, setMaxPageTurns, pageCount]);
 
   return (
     <Pickup yOffset={0} itemName={itemName} {...props}>

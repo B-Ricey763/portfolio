@@ -1,6 +1,5 @@
-import { Button, Stack } from "@mantine/core";
+import { Stack } from "@mantine/core";
 import BookOverlay from "../BookOverlay";
-import { IconBrandGithub } from "@tabler/icons-react";
 import { GithubButton, YouTubeButton } from "../ButtonTemplates";
 
 export function GHEvolution() {

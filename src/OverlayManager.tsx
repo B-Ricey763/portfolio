@@ -14,21 +14,21 @@ export default function OverlayManager() {
   const [livingItem, setLivingItem] = useState("");
 
   useEffect(() => {
-    if (item !== "") {
+    if (item !== Item.None) {
       setLivingItem(item);
     }
   }, [item]);
 
   const onClickAway = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    setItem("");
+    setItem(Item.None);
   };
 
   // FIXME: I think it's not focused or something, but this ain't working
   // This doesn't work for some reason but it's the effort that counts
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "Escape") {
-      setItem("");
+      setItem(Item.None);
     }
   };
 

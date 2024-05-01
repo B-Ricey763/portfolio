@@ -1,5 +1,4 @@
-import { Card, Group, List, SimpleGrid, Stack, Text } from "@mantine/core";
-import { OverlayProps } from "../Desk";
+import { Card, Group, Text } from "@mantine/core";
 import ItemOverlay from "../ItemOverlay";
 
 const ClassCard = ({
@@ -14,13 +13,9 @@ const ClassCard = ({
   </Card>
 );
 
-export default function GeorgiaTech(props: OverlayProps) {
+export default function GeorgiaTech() {
   return (
-    <ItemOverlay
-      title="Student at Georgia Institute of Technology"
-      {...props}
-      size="md"
-    >
+    <ItemOverlay title="Student at Georgia Institute of Technology" size="md">
       <Text>
         I am a student at Georgia Tech studying Computer Science with a
         concentration in Systems {"&"} Architecture and CS Theory, planning to

@@ -10,6 +10,7 @@ import {
 import { useSetAtom } from "jotai";
 import type react from "react";
 import { heldItemAtom } from "./Atoms";
+import { Item } from "./Items";
 
 type ItemOverlayProps = {
   title: string;
@@ -36,7 +37,7 @@ export default function ItemOverlay({
         <Stack>
           <Group justify="space-between">
             <Title order={2}> {title} </Title>
-            <CloseButton onClick={() => setItem("")} />
+            <CloseButton onClick={() => setItem(Item.None)} />
           </Group>
           {children}
         </Stack>

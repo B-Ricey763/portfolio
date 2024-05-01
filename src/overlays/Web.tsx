@@ -1,12 +1,12 @@
 import ItemOverlay from "../ItemOverlay";
-import { ContentCard, ImageSection } from "./ImageCard";
+import { ContentCard, ImageSection } from "./ContentCard";
 import { GithubButton } from "../ButtonTemplates";
-import { Grid, Group } from "@mantine/core";
+import { Group } from "@mantine/core";
 
 export default function Web() {
   return (
     <ItemOverlay title="Web Dev">
-      <Group>
+      <Group grow={true} align="stretch">
         <ContentCard
           title="Bespoked Bikes"
           description="Created in 48 hours, Bespoked Bikes is a complete CRUD app simulating a fictional bike company where 'company admins' can manage products and view customers. The backend is written in Python using Flask, the database is sqlite accessed throught SQLAlchemy, and HTML is served through jinja templating"

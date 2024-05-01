@@ -1,6 +1,6 @@
 import { GithubButton } from "../ButtonTemplates";
 import ItemOverlay from "../ItemOverlay";
-import { ContentCard, ImageSection } from "./ImageCard";
+import { ContentCard, ImageSection } from "./ContentCard";
 
 export default function NimGameAI() {
   return (

@@ -7,11 +7,10 @@ import {
   Kbd,
   Transition,
   Box,
-  Stack,
 } from "@mantine/core";
 import { useAtom, useAtomValue } from "jotai";
 import { maxPageTurnsAtom, pageTurnsAtom } from "./Atoms";
-import type { MouseEvent, PropsWithChildren } from "react";
+import { useEffect, type MouseEvent, type PropsWithChildren } from "react";
 
 const ICON_SIZE = 200;
 const PG_BUTTON_WIDTH = "15vw";
@@ -19,6 +18,10 @@ const PG_BUTTON_WIDTH = "15vw";
 export default function BookOverlay({ children }: PropsWithChildren) {
   const [pageTurns, setPageTurns] = useAtom(pageTurnsAtom);
   const maxPageTurns = useAtomValue(maxPageTurnsAtom);
+
+  useEffect(() => {
+    setPageTurns(1);
+  }, [setPageTurns]);
 
   const prevPage = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
