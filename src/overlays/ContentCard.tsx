@@ -40,7 +40,7 @@ export function ContentCard({
   children: { visualSection, button },
 }: ContentCardProps) {
   return (
-    <Card shadow="sm" padding="lg" radius="lg" withBorder>
+    <Card shadow="sm" padding="lg" radius="lg" withBorder w={350}>
       <Card.Section>{visualSection}</Card.Section>
 
       <Group justify="space-between" mt="md" mb="xs">

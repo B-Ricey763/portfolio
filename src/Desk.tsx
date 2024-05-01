@@ -25,7 +25,7 @@ type GLTFResult = GLTF & {
     Coins: THREE.Mesh;
     GT: THREE.Mesh;
     Mic: THREE.Mesh;
-    Web: THREE.Mesh;
+    Cobweb: THREE.Mesh;
     GraduationCap: THREE.Mesh;
     P51: THREE.Mesh;
     B29_1: THREE.Mesh;
@@ -34,6 +34,7 @@ type GLTFResult = GLTF & {
   materials: {
     Standard: THREE.MeshStandardMaterial;
     Shiny: THREE.MeshStandardMaterial;
+    WebMaterial: THREE.MeshStandardMaterial;
   };
 };
 
@@ -230,12 +231,14 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
         </Pickup>
         <Pickup
           itemName={Item.Web}
-          position={[9.316, 17.591, -5.389]}
-          rotation={[-1.217, 0, -0.801]}
+          position={[9.116, 16.957, -5.123]}
+          rotation={[1.722, 0.064, 0.769]}
+          rotationOffset={bookRotOffset}
         >
           <mesh
-            geometry={nodes.Web.geometry}
-            material={materials.Standard}
+            geometry={nodes.Cobweb.geometry}
+            material={materials.WebMaterial}
+            scale={2.003}
             castShadow
           />
         </Pickup>
