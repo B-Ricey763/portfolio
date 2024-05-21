@@ -3,8 +3,12 @@ import { useCursor } from "@react-three/drei";
 import { type ThreeEvent, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { type Mesh, Quaternion, Vector3 } from "three";
-import { useAtom, useAtomValue } from "jotai";
-import { heldItemAtom, uniqueHeldItemsAtom } from "./Atoms";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import {
+  animationRestedAtom,
+  heldItemAtom,
+  uniqueHeldItemsAtom,
+} from "./Atoms";
 import { Item } from "./Items";
 
 import { Select } from "./Selection";
@@ -28,6 +32,7 @@ export default function Pickup({
   const { camera } = useThree();
   const [hovered, setHovered] = useState(false);
   const [item, setItem] = useAtom(heldItemAtom);
+  const setAnimationRested = useSetAtom(animationRestedAtom);
   const uniqueHeldItems = useAtomValue(uniqueHeldItemsAtom);
   // Switch cursor to pointer whwen hovering over the object
   useCursor(hovered);
@@ -38,6 +43,8 @@ export default function Pickup({
       quaternion: [0, 0, 0, 0],
       scale: 1,
       config: config.slow,
+      onStart: () => setAnimationRested(false),
+      onRest: () => setAnimationRested(true),
     }),
     [],
   );

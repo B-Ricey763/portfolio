@@ -22,65 +22,63 @@ const AnimatedText = animated(Text);
 export function DownloadResumeButton() {
   return (
     <Container>
-      <Stack justify="flex-end" align="stretch" h="100vh" p="lg">
-        <Group justify="center">
-          <Button
-            size="lg"
-            color="lime"
-            component="a"
-            target="_blank"
-            href="resume.pdf"
-            download="Bryce_Hanna_Resume.pdf"
-            style={{ pointerEvents: "all" }}
-            rightSection={<IconDownload />}
-          >
-            Download Resume
-          </Button>
-          <Button
-            size="lg"
-            color="cyan"
-            component="a"
-            target="_blank"
-            href="mailto:bhanna30@gatech.edu"
-            style={{ pointerEvents: "all" }}
-            rightSection={<IconMailFilled />}
-          >
-            Email
-          </Button>
-          <Button
-            size="lg"
-            target="_blank"
-            color="red"
-            component="a"
-            href="https://www.youtube.com/@BRicey"
-            style={{ pointerEvents: "all" }}
-            rightSection={<IconBrandYoutubeFilled />}
-          >
-            YouTube
-          </Button>
-          <Button
-            size="lg"
-            color="blue"
-            target="_blank"
-            component="a"
-            href="https://www.linkedin.com/in/bryce-hanna/"
-            style={{ pointerEvents: "all" }}
-            rightSection={<IconBrandLinkedin />}
-          >
-            LinkedIn
-          </Button>
-          <Button
-            size="lg"
-            color="black"
-            target="_blank"
-            component="a"
-            href="https://github.com/B-Ricey763"
-            style={{ pointerEvents: "all" }}
-            rightSection={<IconBrandGithubFilled />}
-          >
-            Github
-          </Button>
-        </Group>
+      <Stack justify="center" align="stretch" p="lg">
+        <Button
+          size="lg"
+          color="lime"
+          component="a"
+          target="_blank"
+          href="resume.pdf"
+          download="Bryce_Hanna_Resume.pdf"
+          style={{ pointerEvents: "all" }}
+          rightSection={<IconDownload />}
+        >
+          Download Resume
+        </Button>
+        <Button
+          size="lg"
+          color="cyan"
+          component="a"
+          target="_blank"
+          href="mailto:bhanna30@gatech.edu"
+          style={{ pointerEvents: "all" }}
+          rightSection={<IconMailFilled />}
+        >
+          Email
+        </Button>
+        <Button
+          size="lg"
+          target="_blank"
+          color="red"
+          component="a"
+          href="https://www.youtube.com/@BRicey"
+          style={{ pointerEvents: "all" }}
+          rightSection={<IconBrandYoutubeFilled />}
+        >
+          YouTube
+        </Button>
+        <Button
+          size="lg"
+          color="blue"
+          target="_blank"
+          component="a"
+          href="https://www.linkedin.com/in/bryce-hanna/"
+          style={{ pointerEvents: "all" }}
+          rightSection={<IconBrandLinkedin />}
+        >
+          LinkedIn
+        </Button>
+        <Button
+          size="lg"
+          color="black"
+          target="_blank"
+          component="a"
+          href="https://github.com/B-Ricey763"
+          style={{ pointerEvents: "all" }}
+          rightSection={<IconBrandGithubFilled />}
+        >
+          Github
+        </Button>
       </Stack>
     </Container>
   );

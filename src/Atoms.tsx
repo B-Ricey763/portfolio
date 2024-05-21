@@ -4,6 +4,7 @@ import { Item } from "./Items";
 
 export const heldItemAtom = atom(Item.None);
 export const maxPageTurnsAtom = atom(0);
+export const animationRestedAtom = atom(false);
 export const uniqueHeldItemsAtom = atom([Item.None]);
 
 const localPageTurnsAtom = atom(0);

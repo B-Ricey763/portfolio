@@ -11,7 +11,11 @@ function App() {
   return (
     <>
       <OverlayManager />
-      <Canvas camera={{ position: [0, 20, 20], fov: 70 }} shadows={true}>
+      <Canvas
+        camera={{ position: [0, 20, 20], fov: 70 }}
+        shadows={true}
+        frameloop="demand"
+      >
         <Suspense fallback={null}>
           <Scene />
         </Suspense>
