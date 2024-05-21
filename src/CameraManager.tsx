@@ -1,32 +1,36 @@
 import { useAtomValue } from "jotai";
 import { easing } from "maath";
 import { animationRestedAtom, heldItemAtom } from "./Atoms";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { CameraControls, Stats } from "@react-three/drei";
 import * as THREE from "three";
-import { useState } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { Item } from "./Items";
 
-const FrameLimiter = ({ fps }: { fps: number }) => {
-  const [clock] = useState(new THREE.Clock());
+function FrameLimiter({ limit = 30 }) {
+  const { invalidate, clock, advance } = useThree();
+  useEffect(() => {
+    let delta = 0;
+    let raf = 0;
+    const interval = 1 / limit;
+    const update = () => {
+      raf = requestAnimationFrame(update);
+      delta += clock.getDelta();
 
-  useFrame((state) => {
-    // HACK: this works but is definitely not canonical
-    // maybe try extracting to a ref?
-    state.ready = false;
-    const timeUntilNextFrame = 1000 / fps - clock.getDelta();
+      if (delta > interval) {
+        invalidate();
+        delta = delta % interval;
+      }
+    };
 
-    setTimeout(
-      () => {
-        state.ready = true;
-        state.invalidate();
-      },
-      Math.max(0, timeUntilNextFrame),
-    );
-  });
+    update();
+    return () => {
+      cancelAnimationFrame(raf);
+    };
+  }, [limit]);
 
   return <group />;
-};
+}
 
 export function CameraManager() {
   const item = useAtomValue(heldItemAtom);
@@ -52,8 +56,7 @@ export function CameraManager() {
 
   return (
     <group>
-      <Stats />
-      {(!animationRested || item === Item.None) && <FrameLimiter fps={30} />}
+      {/* {(!animationRested || item === Item.None) && <FrameLimiter />} */}
     </group>
   );
 }

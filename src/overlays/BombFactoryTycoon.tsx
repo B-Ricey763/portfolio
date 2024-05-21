@@ -5,11 +5,12 @@ import { WebsiteButton, YouTubeButton } from "../ButtonTemplates";
 
 export default function BombFactoryTycoon() {
   return (
-    <ItemOverlay title="Tycoons" size="lg">
-      <Group grow={true} align="stretch">
+    <ItemOverlay title="Tycoons" size="lg" scrollAreaHeight="55vh">
+      <Group align="stretch" wrap="wrap" justify="center">
         <ContentCard
           title="Bomb Factory Tycoon"
           description="This was my first take on the common Roblox game format of a tycoon, where you earn money over time to unlock more structures and droppers. This was a very difficult programming challenge due to the infinite scalability of tycoons, ultimately inspiring me to make my most successful YouTube series to date."
+          width={430}
         >
           {{
             visualSection: <ImageSection link="roblox/BombFactoryTycoon.png" />,
@@ -21,6 +22,7 @@ export default function BombFactoryTycoon() {
         <ContentCard
           title="How to make a Tycoon YouTube Series"
           description="My most popular YouTube series to date, with over 300,000 views. It uses programming techniques such as Object Oriented Programming, object composition, encapsulation, and game loops to teach viewers how to make their very own tycoon game. This is what got my channel 'on the map'"
+          width={430}
         >
           {{
             visualSection: (

@@ -6,23 +6,25 @@ import {
   Group,
   Title,
   CloseButton,
+  ScrollArea,
 } from "@mantine/core";
-import { useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import type react from "react";
-import { heldItemAtom } from "./Atoms";
+import { animationRestedAtom, heldItemAtom } from "./Atoms";
 import { Item } from "./Items";
 
 type ItemOverlayProps = {
   title: string;
+  scrollAreaHeight?: string | number;
 };
 
 export default function ItemOverlay({
   title,
   children,
+  scrollAreaHeight = "50vh",
   ...props
 }: react.PropsWithChildren & ItemOverlayProps & ContainerProps) {
   const setItem = useSetAtom(heldItemAtom);
-
   return (
     <Container {...props} p="xl">
       <Paper
@@ -39,7 +41,14 @@ export default function ItemOverlay({
             <Title order={2}> {title} </Title>
             <CloseButton onClick={() => setItem(Item.None)} />
           </Group>
-          {children}
+          <ScrollArea
+            w="100%"
+            h={scrollAreaHeight}
+            type="always"
+            scrollbars="xy"
+          >
+            {children}
+          </ScrollArea>
         </Stack>
       </Paper>
     </Container>

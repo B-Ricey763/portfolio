@@ -14,7 +14,7 @@ function App() {
       <Canvas
         camera={{ position: [0, 20, 20], fov: 70 }}
         shadows={true}
-        frameloop="demand"
+        frameloop="always"
       >
         <Suspense fallback={null}>
           <Scene />

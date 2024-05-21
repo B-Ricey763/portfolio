@@ -142,6 +142,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
             Math.PI / 6,
           )}
           itemName={Item.CoffeeCup}
+          shouldFreezeScene={true}
         >
           <mesh
             geometry={nodes.Coffee.geometry}
@@ -158,6 +159,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
             Math.PI / 2,
           )}
           itemName={Item.ColorTile}
+          shouldFreezeScene={true}
         >
           <mesh
             geometry={nodes.ColorChaos.geometry}
@@ -186,6 +188,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
             Math.PI / 2,
           )}
           itemName={Item.Bomb}
+          shouldFreezeScene={true}
         >
           <mesh geometry={nodes.Bomb.geometry} material={materials.Standard} />
         </Pickup>
@@ -196,6 +199,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
             Math.PI / 2,
           )}
           itemName={Item.Coins}
+          shouldFreezeScene={true}
         >
           <mesh
             geometry={nodes.Coins.geometry}
@@ -211,6 +215,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
             Math.PI / 2,
           )}
           itemName={Item.GTLogo}
+          shouldFreezeScene={true}
         >
           <mesh
             geometry={nodes.GT.geometry}
@@ -222,6 +227,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           position={[-9.833, 12.304, 2.172]}
           rotation={[0, 0.522, 0]}
           itemName={Item.Mic}
+          shouldFreezeScene={true}
         >
           <mesh
             geometry={nodes.Mic.geometry}
@@ -234,6 +240,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           position={[9.116, 16.957, -5.123]}
           rotation={[1.722, 0.064, 0.769]}
           rotationOffset={bookRotOffset}
+          shouldFreezeScene={true}
         >
           <mesh
             geometry={nodes.Cobweb.geometry}
@@ -250,6 +257,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
             Math.PI / 6,
           )}
           itemName={Item.GraduationCap}
+          shouldFreezeScene={true}
         >
           <mesh
             geometry={nodes.GraduationCap.geometry}
@@ -264,6 +272,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           rotationOffset={new THREE.Quaternion().setFromEuler(
             new THREE.Euler(-Math.PI / 8, Math.PI / 6, -Math.PI / 6, "XYZ"),
           )}
+          shouldFreezeScene={true}
         >
           <mesh
             castShadow
@@ -278,6 +287,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           rotationOffset={new THREE.Quaternion().setFromEuler(
             new THREE.Euler(Math.PI / 8, Math.PI, Math.PI / 6, "ZYX"),
           )}
+          shouldFreezeScene={true}
         >
           <mesh
             castShadow

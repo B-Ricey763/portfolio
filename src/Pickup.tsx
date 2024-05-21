@@ -19,6 +19,7 @@ type PickupProps = {
   yOffset?: number;
   scaleFactor?: number;
   itemName: Item;
+  shouldFreezeScene?: boolean;
 };
 
 export default function Pickup({
@@ -26,16 +27,30 @@ export default function Pickup({
   yOffset = 1.5,
   itemName,
   scaleFactor = 1,
+  shouldFreezeScene = false,
   ...props
 }: JSX.IntrinsicElements["group"] & PickupProps) {
   const meshRef = useRef<Mesh>(null);
   const { camera } = useThree();
   const [hovered, setHovered] = useState(false);
   const [item, setItem] = useAtom(heldItemAtom);
-  const setAnimationRested = useSetAtom(animationRestedAtom);
   const uniqueHeldItems = useAtomValue(uniqueHeldItemsAtom);
   // Switch cursor to pointer whwen hovering over the object
   useCursor(hovered);
+
+  const [animationRested, setAnimationRested] = useState(false);
+  const { set } = useThree();
+
+  // This is a performance optimization, the component can opt in
+  // to freezing the scene, since when viewing the gui we shouldn't be
+  // wasting resources on re-rendering. Especially important for videos
+  useEffect(() => {
+    if (animationRested && shouldFreezeScene && item === itemName) {
+      set({ frameloop: "never" });
+    } else {
+      set({ frameloop: "always" });
+    }
+  }, [animationRested, shouldFreezeScene, item]);
 
   const [springs, api] = useSpring(
     () => ({

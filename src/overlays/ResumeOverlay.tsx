@@ -22,7 +22,15 @@ const AnimatedText = animated(Text);
 export function DownloadResumeButton() {
   return (
     <Container>
-      <Stack justify="center" align="stretch" p="lg">
+      <Stack
+        justify="center"
+        align="stretch"
+        p="lg"
+        style={{
+          position: "absolute",
+          left: 0,
+        }}
+      >
         <Button
           size="lg"
           color="lime"
@@ -31,7 +39,7 @@ export function DownloadResumeButton() {
           href="resume.pdf"
           download="Bryce_Hanna_Resume.pdf"
           style={{ pointerEvents: "all" }}
-          rightSection={<IconDownload />}
+          leftSection={<IconDownload />}
         >
           Download Resume
         </Button>
@@ -42,7 +50,7 @@ export function DownloadResumeButton() {
           target="_blank"
           href="mailto:bhanna30@gatech.edu"
           style={{ pointerEvents: "all" }}
-          rightSection={<IconMailFilled />}
+          leftSection={<IconMailFilled />}
         >
           Email
         </Button>
@@ -53,7 +61,7 @@ export function DownloadResumeButton() {
           component="a"
           href="https://www.youtube.com/@BRicey"
           style={{ pointerEvents: "all" }}
-          rightSection={<IconBrandYoutubeFilled />}
+          leftSection={<IconBrandYoutubeFilled />}
         >
           YouTube
         </Button>
@@ -64,7 +72,7 @@ export function DownloadResumeButton() {
           component="a"
           href="https://www.linkedin.com/in/bryce-hanna/"
           style={{ pointerEvents: "all" }}
-          rightSection={<IconBrandLinkedin />}
+          leftSection={<IconBrandLinkedin />}
         >
           LinkedIn
         </Button>
@@ -75,7 +83,7 @@ export function DownloadResumeButton() {
           component="a"
           href="https://github.com/B-Ricey763"
           style={{ pointerEvents: "all" }}
-          rightSection={<IconBrandGithubFilled />}
+          leftSection={<IconBrandGithubFilled />}
         >
           Github
         </Button>

@@ -15,14 +15,18 @@ const ClassCard = ({
 
 export default function GeorgiaTech() {
   return (
-    <ItemOverlay title="Student at Georgia Institute of Technology" size="md">
+    <ItemOverlay
+      title="Student at Georgia Tech"
+      size="md"
+      scrollAreaHeight={220}
+    >
       <Text>
         I am a student at Georgia Tech studying Computer Science with a
         concentration in Systems {"&"} Architecture and CS Theory, planning to
         graduate in 2026. Some of my favorite classes I have taken so far
         include:
       </Text>
-      <Group grow={true} align="stretch">
+      <Group grow={true} align="stretch" justify="center">
         <ClassCard
           name="CS 1332 Data Structures and Algorithms"
           description="Learning and creating fundemental data structures like linked lists, trees, and graphs"
