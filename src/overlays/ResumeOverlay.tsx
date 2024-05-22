@@ -36,8 +36,7 @@ export function DownloadResumeButton() {
           color="lime"
           component="a"
           target="_blank"
-          href="resume.pdf"
-          download="Bryce_Hanna_Resume.pdf"
+          href="https://b-ricey763.github.io/resume/hanna-bryce-resume.pdf"
           style={{ pointerEvents: "all" }}
           leftSection={<IconDownload />}
         >
