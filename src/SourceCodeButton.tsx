@@ -1,5 +1,4 @@
 import { ActionIcon, Tooltip } from "@mantine/core";
-import { IconBrandGithub, IconBrandGithubFilled } from "@tabler/icons-react";
 
 export default function SourceCodeButton() {
   return (

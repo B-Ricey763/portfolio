@@ -1,4 +1,4 @@
-import { Center, Overlay, Stack, Text, Title } from "@mantine/core";
+import { Center, Overlay, Stack, Title } from "@mantine/core";
 import { IconRotate } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 

@@ -1,4 +1,4 @@
-import { Container, Group, Stack } from "@mantine/core";
+import { Group } from "@mantine/core";
 import BookOverlay from "../BookOverlay";
 import { GithubButton, YouTubeButton } from "../ButtonTemplates";
 

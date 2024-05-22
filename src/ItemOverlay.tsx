@@ -1,16 +1,16 @@
 import {
-  type ContainerProps,
-  Container,
-  Paper,
-  Stack,
-  Group,
-  Title,
   CloseButton,
+  Container,
+  Group,
+  Paper,
   ScrollArea,
+  Stack,
+  Title,
+  type ContainerProps,
 } from "@mantine/core";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import type react from "react";
-import { animationRestedAtom, heldItemAtom } from "./Atoms";
+import { heldItemAtom } from "./Atoms";
 import { Item } from "./Items";
 
 type ItemOverlayProps = {

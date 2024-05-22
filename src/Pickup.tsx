@@ -1,18 +1,13 @@
 import { animated, config, useSpring } from "@react-spring/three";
 import { useCursor } from "@react-three/drei";
-import { type ThreeEvent, useThree } from "@react-three/fiber";
+import { useThree, type ThreeEvent } from "@react-three/fiber";
+import { useAtom, useAtomValue } from "jotai";
 import { useEffect, useRef, useState } from "react";
-import { type Mesh, Quaternion, Vector3 } from "three";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import {
-  animationRestedAtom,
-  heldItemAtom,
-  uniqueHeldItemsAtom,
-} from "./Atoms";
+import { Quaternion, Vector3, type Mesh } from "three";
+import { heldItemAtom, uniqueHeldItemsAtom } from "./Atoms";
 import { Item } from "./Items";
-
-import { Select } from "./Selection";
 import { OutlineGroups } from "./Scene";
+import { Select } from "./Selection";
 
 type PickupProps = {
   rotationOffset?: Quaternion;

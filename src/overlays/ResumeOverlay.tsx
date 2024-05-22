@@ -1,13 +1,7 @@
-import { MeshBasicMaterial } from "three";
-import { Text, Plane, useCursor } from "@react-three/drei";
-import { PAGE_HEIGHT, PAGE_WIDTH } from "../Resume";
-import { Item } from "../Items";
+import { Button, Container, Stack } from "@mantine/core";
+import { animated, config, useSpring } from "@react-spring/three";
+import { Plane, Text, useCursor } from "@react-three/drei";
 import type { ThreeEvent } from "@react-three/fiber";
-import { useState } from "react";
-import { useSpring, animated, config } from "@react-spring/three";
-import { useSetAtom } from "jotai";
-import { heldItemAtom } from "../Atoms";
-import { Button, Container, Group, Stack } from "@mantine/core";
 import {
   IconBrandGithubFilled,
   IconBrandLinkedin,
@@ -15,6 +9,12 @@ import {
   IconDownload,
   IconMailFilled,
 } from "@tabler/icons-react";
+import { useSetAtom } from "jotai";
+import { useState } from "react";
+import { MeshBasicMaterial } from "three";
+import { heldItemAtom } from "../Atoms";
+import { Item } from "../Items";
+import { PAGE_HEIGHT, PAGE_WIDTH } from "../Resume";
 
 const AnimatedPlane = animated(Plane);
 const AnimatedText = animated(Text);

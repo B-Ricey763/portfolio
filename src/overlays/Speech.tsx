@@ -1,4 +1,3 @@
-import { ScrollArea } from "@mantine/core";
 import ItemOverlay from "../ItemOverlay";
 import { ContentCard, VideoSection } from "./ContentCard";
 

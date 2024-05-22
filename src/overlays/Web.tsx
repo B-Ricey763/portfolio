@@ -1,7 +1,7 @@
+import { Group } from "@mantine/core";
+import { GithubButton } from "../ButtonTemplates";
 import ItemOverlay from "../ItemOverlay";
 import { ContentCard, ImageSection } from "./ContentCard";
-import { GithubButton } from "../ButtonTemplates";
-import { Group, ScrollArea } from "@mantine/core";
 
 export default function Web() {
   return (

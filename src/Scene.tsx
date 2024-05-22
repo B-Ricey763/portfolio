@@ -1,4 +1,4 @@
-import { EffectComposer, N8AO, TiltShift2 } from "@react-three/postprocessing";
+import { EffectComposer } from "@react-three/postprocessing";
 import { Desk } from "./Desk";
 import { MultiOutline, Selection } from "./Selection";
 

@@ -1,40 +1,34 @@
-import { useAtomValue } from "jotai";
+import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
-import { animationRestedAtom, heldItemAtom } from "./Atoms";
-import { useFrame, useThree } from "@react-three/fiber";
-import { CameraControls, Stats } from "@react-three/drei";
-import * as THREE from "three";
-import { useEffect, useLayoutEffect } from "react";
-import { Item } from "./Items";
 
-function FrameLimiter({ limit = 30 }) {
-  const { invalidate, clock, advance } = useThree();
-  useEffect(() => {
-    let delta = 0;
-    let raf = 0;
-    const interval = 1 / limit;
-    const update = () => {
-      raf = requestAnimationFrame(update);
-      delta += clock.getDelta();
-
-      if (delta > interval) {
-        invalidate();
-        delta = delta % interval;
-      }
-    };
-
-    update();
-    return () => {
-      cancelAnimationFrame(raf);
-    };
-  }, [limit]);
-
-  return <group />;
-}
+// function FrameLimiter({ limit = 30 }) {
+//   const { invalidate, clock, advance } = useThree();
+//   useEffect(() => {
+//     let delta = 0;
+//     let raf = 0;
+//     const interval = 1 / limit;
+//     const update = () => {
+//       raf = requestAnimationFrame(update);
+//       delta += clock.getDelta();
+//
+//       if (delta > interval) {
+//         invalidate();
+//         delta = delta % interval;
+//       }
+//     };
+//
+//     update();
+//     return () => {
+//       cancelAnimationFrame(raf);
+//     };
+//   }, [limit]);
+//
+//   return <group />;
+// }
 
 export function CameraManager() {
-  const item = useAtomValue(heldItemAtom);
-  const animationRested = useAtomValue(animationRestedAtom);
+  // const item = useAtomValue(heldItemAtom);
+  // const animationRested = useAtomValue(animationRestedAtom);
 
   useFrame((state, delta) => {
     easing.damp3(
