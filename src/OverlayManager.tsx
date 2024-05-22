@@ -8,6 +8,8 @@ import {
 import { Item, ItemOverlayMap } from "./Items";
 import { useAtom } from "jotai";
 import { heldItemAtom } from "./Atoms";
+import MobilePortraitScreen from "./MobilePortraitScreen";
+import SourceCodeButton from "./SourceCodeButton";
 
 export default function OverlayManager() {
   const [item, setItem] = useAtom(heldItemAtom);
@@ -34,11 +36,13 @@ export default function OverlayManager() {
 
   return (
     <MantineProvider defaultColorScheme="dark">
+      <SourceCodeButton />
+      <MobilePortraitScreen />
       <Transition
         duration={500}
         timingFunction="ease"
         transition="pop"
-        mounted={item !== ""}
+        mounted={item !== Item.None}
       >
         {(styles) => (
           <div

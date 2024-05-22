@@ -1,33 +1,62 @@
 import { useAtomValue } from "jotai";
 import { easing } from "maath";
-import { heldItemAtom } from "./Atoms";
-import { useFrame } from "@react-three/fiber";
-import { CameraControls } from "@react-three/drei";
+import { animationRestedAtom, heldItemAtom } from "./Atoms";
+import { useFrame, useThree } from "@react-three/fiber";
+import { CameraControls, Stats } from "@react-three/drei";
+import * as THREE from "three";
+import { useEffect, useLayoutEffect } from "react";
+import { Item } from "./Items";
 
-const DEBUG_MODE = false;
+function FrameLimiter({ limit = 30 }) {
+  const { invalidate, clock, advance } = useThree();
+  useEffect(() => {
+    let delta = 0;
+    let raf = 0;
+    const interval = 1 / limit;
+    const update = () => {
+      raf = requestAnimationFrame(update);
+      delta += clock.getDelta();
+
+      if (delta > interval) {
+        invalidate();
+        delta = delta % interval;
+      }
+    };
+
+    update();
+    return () => {
+      cancelAnimationFrame(raf);
+    };
+  }, [limit]);
+
+  return <group />;
+}
 
 export function CameraManager() {
   const item = useAtomValue(heldItemAtom);
+  const animationRested = useAtomValue(animationRestedAtom);
 
   useFrame((state, delta) => {
-    if (item === "" && !DEBUG_MODE) {
-      easing.damp3(
-        state.camera.position,
-        [
-          state.pointer.x,
-          20 + state.pointer.y / 2,
-          20 + Math.atan(state.pointer.y * 2),
-        ],
-        0.3,
-        delta,
-      );
-      state.camera.lookAt(
-        state.camera.position.x * 2,
-        3 + state.camera.position.y * 0.5,
-        -4,
-      );
-    }
+    easing.damp3(
+      state.camera.position,
+      [
+        state.pointer.x,
+        20 + state.pointer.y / 2,
+        20 + Math.atan(state.pointer.y * 2),
+      ],
+      0.3,
+      delta,
+    );
+    state.camera.lookAt(
+      state.camera.position.x * 2,
+      3 + state.camera.position.y * 0.5,
+      -4,
+    );
   });
 
-  return DEBUG_MODE ? <CameraControls /> : <group />;
+  return (
+    <group>
+      {/* {(!animationRested || item === Item.None) && <FrameLimiter />} */}
+    </group>
+  );
 }

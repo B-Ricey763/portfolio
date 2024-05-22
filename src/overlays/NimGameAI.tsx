@@ -8,6 +8,7 @@ export default function NimGameAI() {
       <ContentCard
         title="Nim, a subtraction game, with an AI that always wins"
         description="Nim is a mathematical subtraction game that you can win using combinatorial game theory. I created the game in the terminal that has an AI that will always win. In addition, the project is made in rust, so, ya know, it's blazingly fast :)"
+        width="100%"
       >
         {{
           visualSection: <ImageSection link="NimGameAI.png" />,

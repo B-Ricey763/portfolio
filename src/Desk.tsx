@@ -25,7 +25,7 @@ type GLTFResult = GLTF & {
     Coins: THREE.Mesh;
     GT: THREE.Mesh;
     Mic: THREE.Mesh;
-    Web: THREE.Mesh;
+    Cobweb: THREE.Mesh;
     GraduationCap: THREE.Mesh;
     P51: THREE.Mesh;
     B29_1: THREE.Mesh;
@@ -34,6 +34,7 @@ type GLTFResult = GLTF & {
   materials: {
     Standard: THREE.MeshStandardMaterial;
     Shiny: THREE.MeshStandardMaterial;
+    WebMaterial: THREE.MeshStandardMaterial;
   };
 };
 
@@ -141,6 +142,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
             Math.PI / 6,
           )}
           itemName={Item.CoffeeCup}
+          shouldFreezeScene={true}
         >
           <mesh
             geometry={nodes.Coffee.geometry}
@@ -157,6 +159,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
             Math.PI / 2,
           )}
           itemName={Item.ColorTile}
+          shouldFreezeScene={true}
         >
           <mesh
             geometry={nodes.ColorChaos.geometry}
@@ -185,6 +188,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
             Math.PI / 2,
           )}
           itemName={Item.Bomb}
+          shouldFreezeScene={true}
         >
           <mesh geometry={nodes.Bomb.geometry} material={materials.Standard} />
         </Pickup>
@@ -195,6 +199,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
             Math.PI / 2,
           )}
           itemName={Item.Coins}
+          shouldFreezeScene={true}
         >
           <mesh
             geometry={nodes.Coins.geometry}
@@ -210,6 +215,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
             Math.PI / 2,
           )}
           itemName={Item.GTLogo}
+          shouldFreezeScene={true}
         >
           <mesh
             geometry={nodes.GT.geometry}
@@ -221,6 +227,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           position={[-9.833, 12.304, 2.172]}
           rotation={[0, 0.522, 0]}
           itemName={Item.Mic}
+          shouldFreezeScene={true}
         >
           <mesh
             geometry={nodes.Mic.geometry}
@@ -230,12 +237,15 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
         </Pickup>
         <Pickup
           itemName={Item.Web}
-          position={[9.316, 17.591, -5.389]}
-          rotation={[-1.217, 0, -0.801]}
+          position={[9.116, 16.957, -5.123]}
+          rotation={[1.722, 0.064, 0.769]}
+          rotationOffset={bookRotOffset}
+          shouldFreezeScene={true}
         >
           <mesh
-            geometry={nodes.Web.geometry}
-            material={materials.Standard}
+            geometry={nodes.Cobweb.geometry}
+            material={materials.WebMaterial}
+            scale={2.003}
             castShadow
           />
         </Pickup>
@@ -247,6 +257,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
             Math.PI / 6,
           )}
           itemName={Item.GraduationCap}
+          shouldFreezeScene={true}
         >
           <mesh
             geometry={nodes.GraduationCap.geometry}
@@ -261,6 +272,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           rotationOffset={new THREE.Quaternion().setFromEuler(
             new THREE.Euler(-Math.PI / 8, Math.PI / 6, -Math.PI / 6, "XYZ"),
           )}
+          shouldFreezeScene={true}
         >
           <mesh
             castShadow
@@ -275,6 +287,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           rotationOffset={new THREE.Quaternion().setFromEuler(
             new THREE.Euler(Math.PI / 8, Math.PI, Math.PI / 6, "ZYX"),
           )}
+          shouldFreezeScene={true}
         >
           <mesh
             castShadow

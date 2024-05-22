@@ -7,6 +7,7 @@ type ContentCardProps = {
     visualSection: JSX.Element;
     button: JSX.Element;
   };
+  width?: number | string;
 };
 
 type VisualSectionProps = {
@@ -37,10 +38,11 @@ export function VideoSection({ link, height = 315 }: VisualSectionProps) {
 export function ContentCard({
   title,
   description,
+  width = "100%",
   children: { visualSection, button },
 }: ContentCardProps) {
   return (
-    <Card shadow="sm" padding="lg" radius="lg" withBorder>
+    <Card shadow="sm" padding="lg" radius="lg" withBorder w={width}>
       <Card.Section>{visualSection}</Card.Section>
 
       <Group justify="space-between" mt="md" mb="xs">

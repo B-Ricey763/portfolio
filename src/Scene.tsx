@@ -15,20 +15,7 @@ export default function Scene() {
   return (
     <>
       <Selection>
-        <EffectComposer
-          stencilBuffer
-          enableNormalPass={false}
-          autoClear={false}
-          multisampling={4}
-        >
-          <N8AO
-            halfRes
-            aoSamples={5}
-            aoRadius={0.4}
-            distanceFalloff={0.75}
-            intensity={1}
-          />
-          <TiltShift2 samples={5} blur={0.05} />
+        <EffectComposer autoClear={false}>
           <MultiOutline
             group={OutlineGroups.Hovered}
             blur

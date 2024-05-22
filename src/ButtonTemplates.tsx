@@ -27,7 +27,7 @@ export const GithubButton = ({
     fullWidth
     mt={mt}
     radius="md"
-    rightSection={<IconBrandGithub size={18} />}
+    leftSection={<IconBrandGithub size={18} />}
   >
     {children}
   </Button>
