@@ -1,11 +1,11 @@
 import "@mantine/core/styles.css";
+import { Loader } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import "./App.css";
-import Scene from "./Scene";
-import OverlayManager from "./OverlayManager";
 import { CameraManager } from "./CameraManager";
-import { Loader } from "@react-three/drei";
+import OverlayManager from "./OverlayManager";
+import Scene from "./Scene";
 
 function App() {
   return (
