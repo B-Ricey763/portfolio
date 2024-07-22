@@ -13,6 +13,9 @@ import VIP from "./overlays/VIP";
 import Web from "./overlays/Web";
 import YouTube from "./overlays/YouTube";
 
+// HACK: For some reason, if you import this enum BEFORE importing an Atom, the entire app will break
+// Remember this when you run into weird errors
+
 export enum Item {
   CoffeeCup = "CoffeeCup",
   ColorTile = "ColorTile",

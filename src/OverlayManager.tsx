@@ -1,13 +1,15 @@
 import { MantineProvider, Transition } from "@mantine/core";
+import { useAtom } from "jotai";
 import {
   type KeyboardEvent,
   type MouseEvent,
   useEffect,
   useState,
 } from "react";
-import { Item, ItemOverlayMap } from "./Items";
-import { useAtom } from "jotai";
+// For some odd reason, if you swap the order of imports of Item and heldItemAtom
+// the app will completely break
 import { heldItemAtom } from "./Atoms";
+import { Item, ItemOverlayMap } from "./Items";
 import MobilePortraitScreen from "./MobilePortraitScreen";
 import SourceCodeButton from "./SourceCodeButton";
 
