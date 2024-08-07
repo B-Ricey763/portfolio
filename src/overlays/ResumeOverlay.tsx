@@ -125,7 +125,7 @@ function LearnMoreButton({ yPos, size, item }: LearmMoreProps) {
           color: "black",
         })
       }
-      material-opacity={springs.opacity}
+      material-opacity={0.7} // springs.opacity}
       rotation={[-Math.PI / 2, 0, 0]}
       onClick={onButtonClick}
       onPointerOver={() => setHovered(true)}
@@ -150,7 +150,7 @@ function positionOnPage(yPos: number) {
   return -PAGE_HEIGHT / 2 + yPos;
 }
 
-const PROFISEE_Y = positionOnPage(1.8);
+const PROFISEE_Y = positionOnPage(1.2);
 // const HELP_INTIIAL = new THREE.Vector3(2, 0, PROFISEE_Y);
 // const HELP_GOAL = HELP_INTIIAL.clone();
 
@@ -166,27 +166,27 @@ export default function ResumeOverlay() {
       />
       <LearnMoreButton yPos={PROFISEE_Y} size={0.5} item={Item.Profisee} />
       <LearnMoreButton
-        yPos={positionOnPage(2.28)}
+        yPos={positionOnPage(1.68)}
         size={0.4}
         item={Item.YouTube}
       />
-      <LearnMoreButton yPos={positionOnPage(2.7)} size={0.4} item={Item.P51} />
-      <LearnMoreButton
-        yPos={positionOnPage(3.19)}
-        size={0.36}
-        item={Item.None}
-      />
-      <LearnMoreButton yPos={positionOnPage(3.53)} size={0.3} item={Item.B29} />
-      <LearnMoreButton
-        yPos={positionOnPage(3.845)}
-        size={0.32}
-        item={Item.GHEvolution}
-      />
-      <LearnMoreButton
-        yPos={positionOnPage(4.25)}
-        size={0.45}
-        item={Item.ColorTile}
-      />
+      {/* <LearnMoreButton yPos={positionOnPage(2.7)} size={0.4} item={Item.P51} /> */}
+      {/* <LearnMoreButton */}
+      {/*   yPos={positionOnPage(3.19)} */}
+      {/*   size={0.36} */}
+      {/*   item={Item.None} */}
+      {/* /> */}
+      <LearnMoreButton yPos={positionOnPage(2.55)} size={0.3} item={Item.B29} />
+      {/* <LearnMoreButton */}
+      {/*   yPos={positionOnPage(3.845)} */}
+      {/*   size={0.32} */}
+      {/*   item={Item.GHEvolution} */}
+      {/* /> */}
+      {/* <LearnMoreButton */}
+      {/*   yPos={positionOnPage(4.25)} */}
+      {/*   size={0.45} */}
+      {/*   item={Item.ColorTile} */}
+      {/* /> */}
     </>
   );
 }
