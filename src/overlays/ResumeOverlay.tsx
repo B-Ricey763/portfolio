@@ -125,7 +125,7 @@ function LearnMoreButton({ yPos, size, item }: LearmMoreProps) {
           color: "black",
         })
       }
-      material-opacity={0.7} // springs.opacity}
+      material-opacity={springs.opacity}
       rotation={[-Math.PI / 2, 0, 0]}
       onClick={onButtonClick}
       onPointerOver={() => setHovered(true)}
