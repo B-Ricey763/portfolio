@@ -1,5 +1,8 @@
 # My Portfolio 
-![3d portfolio website](assets/thumbnail.png)
+
+
+https://github.com/user-attachments/assets/83e0e22e-e441-4d21-b5c1-5c1a0bf00df4
+
 
 ## Wait, it's 3D?!?
 Why did I spend the time (a long time, mind you) to make a fully 3D portfolio website when I could've just slapped together a static site, used some CSS to make it pretty, and called it a day?
