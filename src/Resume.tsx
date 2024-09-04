@@ -3,7 +3,7 @@ import { MeshBasicMaterial } from "three";
 import Pickup from "./Pickup";
 import { Item } from "./Items";
 import * as THREE from "three";
-import ResumeOverlay from "./overlays/ResumeOverlay";
+// import ResumeOverlay from "./overlays/ResumeOverlay";
 import { useAtom } from "jotai";
 import { heldItemAtom } from "./Atoms";
 
@@ -14,7 +14,7 @@ const WHITE_MATERIAL = new MeshBasicMaterial({ color: "white" });
 
 export default function Resume(props: JSX.IntrinsicElements["group"]) {
   const pageTexture = useTexture("resume.png");
-  const [item, setItem] = useAtom(heldItemAtom);
+  const [_item, setItem] = useAtom(heldItemAtom);
 
   // Only the top face should have the resume png
   const materials = [
