@@ -43,7 +43,7 @@ export default function Resume(props: JSX.IntrinsicElements["group"]) {
         material={materials}
         onPointerMissed={() => setItem(Item.None)}
       />
-      {item === Item.Resume && <ResumeOverlay />}
+      {/* {item === Item.Resume && <ResumeOverlay />} */}
     </Pickup>
   );
 }
