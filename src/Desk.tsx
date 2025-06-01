@@ -30,6 +30,8 @@ type GLTFResult = GLTF & {
     P51: THREE.Mesh;
     B29_1: THREE.Mesh;
     B29_2: THREE.Mesh;
+    VR_1: THREE.Mesh;
+    VR_2: THREE.Mesh;
   };
   materials: {
     Standard: THREE.MeshStandardMaterial;
@@ -47,7 +49,9 @@ const HELP_TEXT_GOAL = HELP_TEXT_INITIAL.clone().add(
 );
 
 export function Desk(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("/desk-transformed.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF(
+    "/desk-transformed-test.glb",
+  ) as GLTFResult;
   const heldItem = useAtomValue(heldItemAtom);
   const [uniqueHeldItems, setUniqueHeldItems] = useAtom(uniqueHeldItemsAtom);
   //const setItem = useSetAtom(heldItemAtom);
@@ -247,6 +251,27 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
             material={materials.WebMaterial}
             scale={2.003}
             castShadow
+          />
+        </Pickup>
+        <Pickup
+          itemName={Item.VR}
+          position={[5.735, 10.562, -3.906]}
+          rotation={[-0.054, -0.91, -0.067]}
+          rotationOffset={new THREE.Quaternion().setFromEuler(
+            new THREE.Euler(Math.PI / 8, Math.PI, 0, "ZYX"),
+          )}
+        >
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.VR_1.geometry}
+            material={materials.Standard}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.VR_2.geometry}
+            material={materials.Shiny}
           />
         </Pickup>
         <Pickup
