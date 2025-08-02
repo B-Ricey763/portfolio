@@ -17,19 +17,23 @@ import Resume from "./Resume";
 type GLTFResult = GLTF & {
   nodes: {
     Shelf: THREE.Mesh;
-    Coffee: THREE.Mesh;
-    ColorChaos: THREE.Mesh;
     Desk: THREE.Mesh;
     Floor: THREE.Mesh;
     Bomb: THREE.Mesh;
     Coins: THREE.Mesh;
     GT: THREE.Mesh;
     Mic: THREE.Mesh;
-    Cobweb: THREE.Mesh;
     GraduationCap: THREE.Mesh;
     P51: THREE.Mesh;
     B29_1: THREE.Mesh;
     B29_2: THREE.Mesh;
+    Cobweb: THREE.Mesh;
+    VR_1: THREE.Mesh;
+    VR_2: THREE.Mesh;
+    Coffee: THREE.Mesh;
+    ColorChaos: THREE.Mesh;
+    EXO_1: THREE.Mesh;
+    EXO_2: THREE.Mesh;
   };
   materials: {
     Standard: THREE.MeshStandardMaterial;
@@ -52,6 +56,7 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
   const [uniqueHeldItems, setUniqueHeldItems] = useAtom(uniqueHeldItemsAtom);
   //const setItem = useSetAtom(heldItemAtom);
   // setItem(Item.Resume);
+  console.log(nodes);
 
   useEffect(() => {
     if (uniqueHeldItems.indexOf(heldItem) === -1) {
@@ -250,6 +255,27 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           />
         </Pickup>
         <Pickup
+          itemName={Item.VR}
+          position={[5.735, 10.562, -3.906]}
+          rotation={[-0.054, -0.91, -0.067]}
+          rotationOffset={new THREE.Quaternion().setFromEuler(
+            new THREE.Euler(Math.PI / 8, Math.PI, 0, "ZYX"),
+          )}
+        >
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.VR_1.geometry}
+            material={materials.Standard}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.VR_2.geometry}
+            material={materials.Shiny}
+          />
+        </Pickup>
+        <Pickup
           position={[-3.226, 12.228, -4.529]}
           rotation={[0.189, 0.507, -0.154]}
           rotationOffset={new THREE.Quaternion().setFromAxisAngle(
@@ -297,6 +323,29 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           <mesh
             castShadow
             geometry={nodes.B29_2.geometry}
+            material={materials.Shiny}
+          />
+        </Pickup>
+        <Pickup
+          itemName={Item.EXO}
+          rotationOffset={new THREE.Quaternion().setFromEuler(
+            new THREE.Euler(-Math.PI / 5, 0, 0),
+          )}
+          scaleFactor={0.35}
+          shouldFreezeScene
+          position={[12.162, 12.303, 1.752]}
+          rotation={[0.161, 1.197, -0.181]}
+        >
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.EXO_1.geometry}
+            material={materials.Standard}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.EXO_2.geometry}
             material={materials.Shiny}
           />
         </Pickup>
