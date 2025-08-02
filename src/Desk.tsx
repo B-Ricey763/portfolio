@@ -51,13 +51,12 @@ const HELP_TEXT_GOAL = HELP_TEXT_INITIAL.clone().add(
 );
 
 export function Desk(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF(
-    "/desk-transformed-test.glb",
-  ) as GLTFResult;
+  const { nodes, materials } = useGLTF("/desk-transformed.glb") as GLTFResult;
   const heldItem = useAtomValue(heldItemAtom);
   const [uniqueHeldItems, setUniqueHeldItems] = useAtom(uniqueHeldItemsAtom);
   //const setItem = useSetAtom(heldItemAtom);
   // setItem(Item.Resume);
+  console.log(nodes);
 
   useEffect(() => {
     if (uniqueHeldItems.indexOf(heldItem) === -1) {
@@ -330,8 +329,9 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
         <Pickup
           itemName={Item.EXO}
           rotationOffset={new THREE.Quaternion().setFromEuler(
-            new THREE.Euler(Math.PI / 8, Math.PI, Math.PI / 6, "ZYX"),
+            new THREE.Euler(-Math.PI / 5, 0, 0),
           )}
+          scaleFactor={0.35}
           shouldFreezeScene
           position={[12.162, 12.303, 1.752]}
           rotation={[0.161, 1.197, -0.181]}

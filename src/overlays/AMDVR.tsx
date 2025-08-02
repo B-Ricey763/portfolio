@@ -1,19 +1,39 @@
-import { WebsiteButton } from "../ButtonTemplates";
+import { Group } from "@mantine/core";
 import ItemOverlay from "../ItemOverlay";
 import { ContentCard, ImageSection } from "./ContentCard";
 
 export default function AMDVR() {
   return (
-    <ItemOverlay title="Vertically Integrated Project" size="sm">
-      <ContentCard
-        title="VR THingy"
-        description="I worked with researchers to characterize the flight dynamics model of a P51 Mustang and bring it into a 3D environment to dogfight with F16s. We then ported the Monte Carlo Tree Search code from the F16 to the P51 to demonstrate the versatility of the algorithm on different flight platforms. "
-      >
-        {{
-          visualSection: <ImageSection link="vip_screenshot.png" />,
-          button: <WebsiteButton link="https://www.vip.gatech.edu/teams/vwl" />,
-        }}
-      </ContentCard>
+    <ItemOverlay
+      title="Age-related Macular Degeneration (AMD) with XR"
+      size="lg"
+    >
+      <Group align="stretch" wrap="wrap" justify="center">
+        <ContentCard
+          title="Unity XR Application for Diagnosing and Treating Age-related macular degeneration"
+          description="I worked with a doctor from Emory hospital in conjunction with Professor Michael Nitsche to create a mixed reality (XR) application using the Unity game engine in C# to diagnose and treat Age-related Macular Degeneration. In addition, I collaborated with designers to make a user friendly and inuitive interface catered towards elderly, who are the most afflicted by AMD."
+          width={430}
+        >
+          {{
+            visualSection: (
+              <ImageSection link="amd-vr-prl-training-screenshot.png " />
+            ),
+            button: <> </>,
+          }}
+        </ContentCard>
+        <ContentCard
+          title="Doctor Dashboard to interface with Unity XR App"
+          description="I developed a Doctor Dashboard using React and Typescript that consumes data from the Unity app in real time, providing medical professionals with statistics and data necessary to evaluate patients remotely. Through a SQLite database and server hosted on a VPS, the unity app could communicate over HTTP to transfer test and training results that could be visualized with Rechart."
+          width={430}
+        >
+          {{
+            visualSection: (
+              <ImageSection link="amd-vr-dashboard-screenshot.png" />
+            ),
+            button: <> </>,
+          }}
+        </ContentCard>
+      </Group>
     </ItemOverlay>
   );
 }
