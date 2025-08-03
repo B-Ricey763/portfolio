@@ -111,10 +111,10 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           userData={{ name: "DeskBook4" }}
         />
         <group
-          position={[6.947, 14.382, -5.968]}
-          rotation={[1.367, -0.02, 0.056]}
+          position={[4.207, 13.076, -5.03]}
+          rotation={[0, -1.258, 0]}
           scale={[0.954, 0.044, 1.377]}
-          userData={{ name: "WebBook3" }}
+          userData={{ name: "WebBook2" }}
         />
         <Book
           pagePath="profisee"
@@ -125,11 +125,14 @@ export function Desk(props: JSX.IntrinsicElements["group"]) {
           rotationOffset={bookRotOffset}
           itemName={Item.Profisee}
         />
-        <group
-          position={[4.207, 13.076, -5.03]}
-          rotation={[0, -1.258, 0]}
-          scale={[0.954, 0.044, 1.377]}
-          userData={{ name: "WebBook2" }}
+        <Book
+          pagePath="gtri"
+          pageCount={5}
+          position={[4.4, 15.382, -5]}
+          rotation={[1.367, -0.02, 0.056]}
+          rotationOffset={bookRotOffset}
+          userData={{ name: "WebBook3" }}
+          itemName={Item.GTRI}
         />
         <mesh
           geometry={nodes.Shelf.geometry}

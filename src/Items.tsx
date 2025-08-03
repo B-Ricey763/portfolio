@@ -13,6 +13,7 @@ import VIP from "./overlays/VIP";
 import Web from "./overlays/Web";
 import AMDVR from "./overlays/AMDVR";
 import EXO from "./overlays/Exo";
+import GTRI from "./overlays/GTRI";
 import YouTube from "./overlays/YouTube";
 
 // HACK: For some reason, if you import this enum BEFORE importing an Atom, the entire app will break
@@ -35,6 +36,7 @@ export enum Item {
   B29 = "B29",
   VR = "VR",
   EXO = "EXO",
+  GTRI = "GTRI"
   None = "",
 }
 
@@ -55,4 +57,5 @@ export const ItemOverlayMap: { [key: string]: JSX.Element } = {
   [Item.B29]: <GBAGame />,
   [Item.VR]: <AMDVR />,
   [Item.EXO]: <EXO />,
+  [Item.GTRI]: <GTRI />,
 };
