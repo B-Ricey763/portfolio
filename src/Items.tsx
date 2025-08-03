@@ -36,7 +36,7 @@ export enum Item {
   B29 = "B29",
   VR = "VR",
   EXO = "EXO",
-  GTRI = "GTRI"
+  GTRI = "GTRI",
   None = "",
 }
 
