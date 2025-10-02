@@ -16,28 +16,28 @@ const ClassCard = ({
 export default function GeorgiaTech() {
   return (
     <ItemOverlay
-      title="Student at Georgia Tech"
+      title="Classes & Organizations"
       size="md"
       scrollAreaHeight={220}
     >
       <Text>
         I am a student at Georgia Tech studying Computer Science with a
         concentration in Systems {"&"} Architecture and CS Theory, planning to
-        graduate in 2026. Some of my favorite classes I have taken so far
-        include:
+        graduate in December 2026. Some of my relevant coursework and campus
+        involement are:
       </Text>
       <Group grow={true} align="stretch" justify="center">
         <ClassCard
-          name="CS 1332 Data Structures and Algorithms"
-          description="Learning and creating fundemental data structures like linked lists, trees, and graphs"
+          name="Teacher's Assistant for CS 2110 Computer Organization and Programming"
+          description="Teaching students the basics of computer architecture from transistors to circuits, computers, assembly, and eventually C"
         />
         <ClassCard
-          name="CS 2110 Computer Organization and Programming"
-          description="Starting from transistors and building up knowledge of circuits, computers, assembly, and eventually C"
+          name="Flowers Invention Studio Prototype Instructor"
+          description="Guide users to utilize woodworking, metal working, 3D printing, and more to realize their creative or practical projects."
         />
         <ClassCard
-          name="MATH 1564 Linear Algebra with Abstract Vector Spaces"
-          description="Using proofs and set theory to understand the properties of vector spaces and linear transformations"
+          name="CS 3210 Operating Systems"
+          description="Learned general OS concepts and added optimizations to a unix-like operating system such as lazy page allocation and copy on write"
         />
       </Group>
     </ItemOverlay>
